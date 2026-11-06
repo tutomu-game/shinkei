@@ -1289,6 +1289,101 @@ CH.push(
      T(NARR,"こうして、止まっていた七曜日は、ふたたびめぐりはじめた。"),T(NARR,"――第三部「止まった七曜日」 完――")],
     [T(CHRONO,"……ジカン……モット……")])
 );
+/* ================= 第四章「ねむれる星のたまご」 ================= */
+SVG.starimp = () => `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="104" r="88" fill="#ffe27a" opacity=".15"/><path d="M20 168Q60 150 74 128" stroke="#ffe27a" stroke-width="8" stroke-linecap="round" opacity=".5" fill="none"/><path d="M100 20L122 70 176 74 134 110 148 164 100 134 52 164 66 110 24 74 78 70Z" fill="#ffd24a" stroke="#8a6a10" stroke-width="5" stroke-linejoin="round"/><ellipse cx="86" cy="98" rx="7" ry="10" fill="#3a2a10"/><ellipse cx="114" cy="98" rx="7" ry="10" fill="#3a2a10"/><circle cx="88" cy="94" r="2.6" fill="#fff"/><circle cx="116" cy="94" r="2.6" fill="#fff"/><path d="M88 120Q100 134 112 120" stroke="#3a2a10" stroke-width="4" fill="#ff9a8a" stroke-linecap="round"/><circle cx="72" cy="114" r="6" fill="#ff9ab0" opacity=".7"/><circle cx="128" cy="114" r="6" fill="#ff9ab0" opacity=".7"/></svg>`;
+SVG.kageneko = () => `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="180" rx="60" ry="9" fill="#0005"/><path d="M150 150Q196 140 186 96Q182 84 172 88" stroke="#4a4a6a" stroke-width="12" fill="none" stroke-linecap="round"/><ellipse cx="100" cy="132" rx="50" ry="40" fill="#5a5a7a" stroke="#22223a" stroke-width="4"/><circle cx="62" cy="62" r="24" fill="#6a6a8a" stroke="#22223a" stroke-width="4"/><circle cx="138" cy="62" r="24" fill="#6a6a8a" stroke="#22223a" stroke-width="4"/><circle cx="62" cy="62" r="13" fill="#ffb3c8"/><circle cx="138" cy="62" r="13" fill="#ffb3c8"/><ellipse cx="100" cy="98" rx="46" ry="40" fill="#5a5a7a" stroke="#22223a" stroke-width="4"/><circle cx="82" cy="94" r="8" fill="#ff3a3a"/><circle cx="118" cy="94" r="8" fill="#ff3a3a"/><circle cx="84" cy="91" r="2.5" fill="#fff"/><circle cx="120" cy="91" r="2.5" fill="#fff"/><ellipse cx="100" cy="112" rx="6" ry="5" fill="#ff7a96"/><path d="M92 120L96 130L100 120L104 130L108 120" stroke="#fff" stroke-width="3" fill="none"/><path d="M60 108L36 102M60 114L36 118M140 108L164 102M140 114L164 118" stroke="#22223a" stroke-width="2.5"/></svg>`;
+const yorumogSVG = big => `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="104" r="94" fill="#7a3aa8" opacity="${big ? .28 : .16}"/><path d="M20 190Q8 100 56 66Q100 ${big ? 4 : 24} 144 66Q192 100 180 190Q150 176 130 190Q100 172 70 190Q50 176 20 190Z" fill="#14081e" stroke="#7a3aa8" stroke-width="4"/>${big ? `<path d="M52 66L38 18 72 52M148 66L162 18 128 52" fill="#14081e" stroke="#7a3aa8" stroke-width="4" stroke-linejoin="round"/><g fill="#ffe27a"><circle cx="30" cy="60" r="4"/><circle cx="170" cy="40" r="4"/><circle cx="24" cy="130" r="3"/><circle cx="178" cy="120" r="3"/></g>` : ""}<g fill="#fff" opacity=".85"><circle cx="64" cy="84" r="2"/><circle cx="140" cy="76" r="2.4"/><circle cx="120" cy="150" r="2"/><circle cx="78" cy="160" r="1.8"/></g><ellipse cx="78" cy="96" rx="12" ry="${big ? 16 : 12}" fill="#fff"/><ellipse cx="122" cy="96" rx="12" ry="${big ? 16 : 12}" fill="#fff"/><circle cx="80" cy="98" r="5" fill="#a02ae0"/><circle cx="120" cy="98" r="5" fill="#a02ae0"/><path d="M54 128Q100 ${big ? 188 : 170} 146 128Q100 ${big ? 146 : 140} 54 128Z" fill="#3a0a4a" stroke="#c36bff" stroke-width="3"/><path d="M64 130l6 14 6-12 6 14 6-12 6 14 6-12 6 14 6-12 6 14 6-12 6 10" fill="#fff"/></svg>`;
+SVG.yorumog = () => yorumogSVG(false); SVG.yorumog2 = () => yorumogSVG(true);
+SVG.obaba = () => `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="104" r="90" fill="#9fb8ff" opacity=".15"/><path d="M10 200Q16 134 64 124L100 156 136 124Q184 134 190 200Z" fill="#2a3a7a" stroke="#cfe0ff" stroke-width="3"/><g fill="#ffe27a"><path d="M40 176l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/><path d="M150 160l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/><path d="M100 186l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></g><circle cx="100" cy="30" r="20" fill="#f4f4fa" stroke="#9aa0c0" stroke-width="3"/><ellipse cx="100" cy="86" rx="44" ry="46" fill="#ffe3c8" stroke="#7a5a3a" stroke-width="4"/><path d="M56 76Q58 38 100 38Q142 38 144 76Q130 58 100 58Q70 58 56 76Z" fill="#f4f4fa" stroke="#9aa0c0" stroke-width="3"/><circle cx="82" cy="90" r="13" fill="#fff8" stroke="#7a5a3a" stroke-width="3"/><circle cx="118" cy="90" r="13" fill="#fff8" stroke="#7a5a3a" stroke-width="3"/><path d="M95 90H105" stroke="#7a5a3a" stroke-width="3"/><circle cx="82" cy="91" r="4" fill="#3a2a1a"/><circle cx="118" cy="91" r="4" fill="#3a2a1a"/><circle cx="68" cy="108" r="7" fill="#ff9ab0" opacity=".6"/><circle cx="132" cy="108" r="7" fill="#ff9ab0" opacity=".6"/><path d="M86 116Q100 130 114 116" stroke="#7a3a2a" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
+SVG.hanasei = () => `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" fill="#ffb3d6" opacity=".14"/><path d="M100 150V196" stroke="#3a9a4a" stroke-width="9"/><path d="M100 176Q60 150 52 176Q82 190 100 176Z M100 176Q140 150 148 176Q118 190 100 176Z" fill="#5acf6a" stroke="#2a6a30" stroke-width="3"/><g fill="#ff9ac4" stroke="#b02a6a" stroke-width="4"><ellipse cx="100" cy="36" rx="22" ry="30"/><ellipse cx="160" cy="80" rx="30" ry="22"/><ellipse cx="138" cy="144" rx="26" ry="24" transform="rotate(30 138 144)"/><ellipse cx="62" cy="144" rx="26" ry="24" transform="rotate(-30 62 144)"/><ellipse cx="40" cy="80" rx="30" ry="22"/></g><circle cx="100" cy="94" r="42" fill="#ffe9a8" stroke="#b07a1a" stroke-width="4"/><ellipse cx="86" cy="90" rx="6" ry="9" fill="#3a2a10"/><ellipse cx="114" cy="90" rx="6" ry="9" fill="#3a2a10"/><circle cx="88" cy="86" r="2.4" fill="#fff"/><circle cx="116" cy="86" r="2.4" fill="#fff"/><path d="M88 108Q100 122 112 108" stroke="#7a3a2a" stroke-width="4" fill="#ff9a8a" stroke-linecap="round"/><circle cx="74" cy="104" r="6" fill="#ff9ab0" opacity=".7"/><circle cx="126" cy="104" r="6" fill="#ff9ab0" opacity=".7"/><text x="100" y="22" font-size="18" text-anchor="middle">✨</text></svg>`;
+PORT["🌠"] = SVG.starimp; PORT["🐀"] = SVG.kageneko; PORT["🕳️"] = SVG.yorumog; PORT["🌌"] = SVG.yorumog2; PORT["👵"] = SVG.obaba; PORT["🌸"] = SVG.hanasei;
+PORT["🐾"] = () => petSVG({ s: 1, ty: 0, xp: 0 }, "happy").replace('viewBox="0 0 200 200"', 'viewBox="38 52 124 124"');
+Object.assign(SPS, {
+  "🌠": [ sp_("きらきらたいあたり","dmg","#ffe27a",["bash","magic"],.26), sp_("ほしのいたずら","seal","#ffe27a",["magic"]) ],
+  "🐀": [ sp_("かげのひっかき","dmg","#8a8ab0",["claw","dark"],.28), sp_("チュウチュウ軍団","drain","#7a7a9a",["claw"],.2) ],
+  "🕳️": [ sp_("よるのひとのみ","drain","#7a3aa8",["dark","dark","magic"],.3), sp_("やみのおたけび","seal","#7a3aa8",["dark"]), sp_("ふかい夜","dmg","#5a2a88",["dark","dark","magic","bash"],.36) ],
+  "👵": [ sp_("ほしのおまじない","heal","#9fb8ff",[],.3), sp_("ほうきアタック","dmg","#cfe0ff",["bash","magic"],.28), sp_("ねむりのうた","seal","#9fb8ff",["magic"]) ],
+  "🌸": [ sp_("はなびらのまい","dmg","#ffb3d6",["magic","holy"],.28), sp_("花のしらべ","heal","#ffb3d6",[],.33), sp_("まよいのかおり","seal","#ffb3d6",["magic"]) ],
+  "🐾": [ sp_("ほしのさけび","dmg","#ffe9a8",["holy","magic","holy"],.34), sp_("きらめくバリア","shield","#ffe9a8"), sp_("まもりのひかり","heal","#ffe9a8",[],.35) ],
+  "🌌": [ sp_("よるのおおぐち","drain","#7a3aa8",["dark","dark","magic"],.3), sp_("ほしぐいの闇","dmg","#5a2a88",["dark","dark","magic","dark","bash"],.4), sp_("ながい夜","seal","#4de1ff",["magic"]), sp_("よる再生","heal","#7a3aa8",[],.35) ]
+});
+Object.assign(VP, { "🌠": { pitch: 1.6, rate: 1.2, vi: 2 }, "🐀": { pitch: 1.5, rate: 1.3, vi: 0 }, "🕳️": { pitch: 0, rate: .6, vi: 1 }, "🌌": { pitch: 0, rate: .5, vi: 1 }, "👵": { pitch: .8, rate: .8, vi: 2 }, "🌸": { pitch: 1.5, rate: 1, vi: 2 }, "🐾": { pitch: 1.8, rate: 1, vi: 2 } });
+Object.assign(CV, {
+  "🌠": mkCV(["えいっ！","きらきら〜！","つかまえた！"],"ふたつめ！","みっつめ！","ながれぼしアタック！",["あれ？ ちがった！","えへへ、まちがい！"],["いたっ！","わぁ〜！"],"ぼくの勝ち！ あそんでくれて、ありがと！","まけたぁ…。"),
+  "🐀": mkCV(["チュッ！","もらった！","チュチュ！"],"二匹め、チュ！","三匹め、チュー！","影ねずみ軍団、突撃！",["チュ…ちがう！","しっぱいチュ…"],["チュッ！？","いたいチュ！"],"チュッ、ヨルモグさまに、ほうこくだ！","チュ…にげろー！"),
+  "🕳️": mkCV(["……ヨル……","……クウ……","……ホシ……"],"……フタツメ……","……ミッツメ……","……ヨルヲ……ヨコセ……！",["……？","……チガウ……"],["……グ……","……ヒカリ……ガ……"],"……ホシノコ……モラウ……","……ヨルモグ……ニゲル……"),
+  "🌌": mkCV(["……ヨル……","……ゼンブ……","……ホシ……クウ……"],"……フタツ……","……ミッツ……","……ヨルノ……オワリ……！",["……ナゼ……","……チガウ……"],["……グゥ……","……マブシイ……"],"……ヨル……ゼンブ……ワレノ……","……アタタカイ……ヒカリ……"),
+  "👵": mkCV(["ほいほい。","それ、おまじない。","よっこいしょ。"],"二つめ、ほい。","三つめ、ほい。","星守りの、とっておきじゃ！",["おや、ちがったかね。","ふむ…？"],["おお…！","ほう、やるねぇ！"],"ふふ、まだまだ若いもんには負けんよ。","…合格じゃ。"),
+  "🌸": mkCV(["えいっ♪","ひらひら〜","いくよ！"],"ふたつめ♪","みっつめ♪","花びらふぶき！！",["あれれ？","ちがったぁ！"],["きゃっ！","いたぁい！"],"えへへ、わたしの勝ち！","まけちゃった〜！"),
+  "🐾": mkCV(["にゃっ！","にゃにゃ！","ポポ、がんばる！"],"にゃ、にゃ！","にゃにゃにゃ！","ほしの、さけび！！",["にゃ…ちがう…","こわい…"],["にゃうっ！","こわれちゃう…"],"ポポ…つよく、なった！","あったかい…。")
+});
+const P4 = (e, name, title, o, intro, win, lose) => ({ title, e, name, pairs: o.p, mem: o.m, theme: o.t, boss: !!o.b, hpMul: o.h, rw: o.rw, bg: o.bg, intro, win, lose });
+const MITE = { who: "🌠", name: "流れ星ミーテ" }, KNEZ = { who: "🐀", name: "影ねずみ" }, YORU = { who: "🕳️", name: "ヨルモグ" }, YORU2 = { who: "🌌", name: "ヨルモグ" }, AYA = { who: "👵", name: "星守りのばあや" }, FLORA = { who: "🌸", name: "花の精フローラ" }, POPO = { who: "🐾", name: "ポポ" };
+CH.push(
+  P4("🌠", "流れ星ミーテ", "星が降る夜", { p: 6, m: .6, t: 1, h: 1, rw: { coin: 400, shard: 4 }, bg: "radial-gradient(circle at 50% 15%, #2a3a7a, #05061a)" },
+    [T(NARR, "第四章 ――ねむれる星のたまご――", { bg: "radial-gradient(circle at 50% 15%, #2a3a7a, #05061a)" }), T(NARR, "時の鐘がもどった夜。空いっぱいに、星がふりそそいだ。"),
+     T(LUMI, "わぁ…！ きれい。…あれ？ ひとつ、おちてくる！"), T(NARR, "勇者の足もとで、小さな星のかけらが、ぽん、とはじけた。"),
+     T(MITE, "ひっかかったな！ そのかけら、ぼくがひろったんだ。かえさないよ！"), T(HERO, "それ、ひとのものじゃ…。"), T(MITE, "いたずらだもん！ あそんでくれたら、かえしてあげる！")],
+    [T(MITE, "わぁ、まけちゃった。…ごめんね。これ、ただのかけらじゃないんだ。"), T(MITE, "〈たまごのからのかけら〉だよ。星のたまごがわれて、中の子がまいごになっちゃったって、お星さまたちがさわいでた。"),
+     T(LUMI, "星の、たまご…？"), T(NARR, "かけらはほのかにあたたかく、北の森をゆびさしていた。")],
+    [T(MITE, "あはは、まだまだだね！")]),
+  P4("🐀", "影ねずみ団", "ポポとの出会い", { p: 6, m: .65, t: 2, h: 1, rw: { coin: 450, shard: 4 }, bg: "radial-gradient(circle at 50% 30%, #1a4a2c, #030a06)" },
+    [T(NARR, "北の森。かけらのひかりが、ふるえる茂みを照らした。"), T(POPO, "……にゃ……。"), T(LUMI, "だれか、いる…？"),
+     T(NARR, "くらがりの中に、ふわふわの小さな生きものがうずくまっていた。そのまわりを、影のねずみたちがとりかこんでいる。"),
+     T(KNEZ, "チュッ！ そのコは、ヨルモグさまのものだ！ わたせー！"), T(HERO, "ことばのわからない子を、いじめるな！")],
+    [T(KNEZ, "チュ…にげろー！"), T(NARR, "ねずみたちが、影にとけていく。ふわふわの子が、おそるおそる、勇者の足にすりよった。"),
+     T(POPO, "にゃ。"), T(LUMI, "この子…かけらと、同じひかりを、もってる。"), T(HERO, "ポポ…って、よんでもいいかな。"), T(POPO, "…にゃ！"),
+     T(NARR, "【ポポが旅についてきた！】")],
+    [T(KNEZ, "チュッ、ざまぁみろ！")]),
+  P4("🕳️", "ヨルモグの影", "夜をたべる影", { p: 8, m: .7, t: 6, h: 1.1, rw: { coin: 500, shard: 5 }, bg: "radial-gradient(circle at 50% 40%, #2a0a3a, #000)" },
+    [T(NARR, "森をぬけると、空から、光が消えた。"), T(YORU, "……ヨル……ヨルヲ……タベル……"), T(LUMI, "あれは…時喰らいの、かけら！？"),
+     T(YORU, "……ホシ……ホシノ、タマゴ……ヨコセ……。"), T(POPO, "にゃ…にゃあ…！"), T(HERO, "ポポに、さわるな！")],
+    [T(YORU, "……ナゼ……アタタカイ……。"), T(NARR, "影は、ちぎれて、南の空へ逃げていった。"),
+     T(LUMI, "ヨルモグ…っていうんだ。夜をたべて、ふくらむ影。…ポポを、ねらってる。"), T(HERO, "星のたまごのこと、くわしい人をさがそう。")],
+    [T(YORU, "……ヨル……ノ、ナカデ……。")]),
+  P4("👵", "星守りのばあや", "星守りの村", { p: 8, m: .75, t: 4, h: 1, rw: { coin: 550, shard: 5 }, bg: "radial-gradient(circle at 50% 20%, #3a3a8a, #080a1e)" },
+    [T(NARR, "星守りの村。屋根のうえに、ひとつずつ、小さな星がのっている。"), T(AYA, "おやおや、お客さんかい。…その子は…！"),
+     T(AYA, "ほほう、星のたまごの、かけらをもっているね。"), T(HERO, "ポポのことを、しっているんですか？"),
+     T(AYA, "知っているとも。だが、守れるかどうかは、べつの話さね。…ひとつ、あたしと勝負しておくれ。")],
+    [T(AYA, "…ふふ、合格だよ。"), T(AYA, "むかし、空に〈星のたまご〉があった。たまごは、世界じゅうの『あした』を守るため、夜の星をうみつづけていたんだ。"),
+     T(AYA, "ところが、時喰らいが鐘をたべた夜、たまごはわれて、中の子が、おちてきた。…それが、その子さ。"), T(POPO, "にゃ…？"),
+     T(LUMI, "ポポが、星のたまごの…中身！？"), T(AYA, "ヨルモグは、その子をたべて、夜をぜんぶ手に入れるつもりだよ。"),
+     T(AYA, "海と空に、星のかけらが、ひとつずつ、ねむっている。ふたつ集めれば、その子の力がめざめるはずさね。")],
+    [T(AYA, "おやおや、まだまだじゃのう。")]),
+  P4("💧", "水の番人ウォルタ", "夜の海", { p: 8, m: .75, t: 1, h: 1.1, rw: { coin: 600, shard: 5 }, bg: "radial-gradient(circle at 50% 25%, #1a4a7a, #020a1a)" },
+    [T(NARR, "夜の海。波の上に、星がうつっている。"), T(G["💧"], "…あなたたち。時の塔のときの。ひさしぶり。"),
+     T(G["💧"], "海の底に、星のかけらがしずんでる。でも、いまは夜が深くて、海がうごかないの。"), T(G["💧"], "…わたしの波をこえられたら、とりにいかせてあげる。")],
+    [T(G["💧"], "ありがとう。…海が、うごいてる。"), T(NARR, "海のなかから、青くひかる星のかけらが、うかびあがってきた。"), T(NARR, "【星のかけら ① を手に入れた！】"),
+     T(POPO, "にゃあ！"), T(G["💧"], "その子、あたたかいのね。…だいじにしてあげて。")],
+    [T(G["💧"], "…まだ、波はこえられないみたい。")]),
+  P4("🌸", "花の精フローラ", "空の庭", { p: 10, m: .8, t: 3, h: 1.15, rw: { coin: 700, shard: 6 }, bg: "radial-gradient(circle at 50% 20%, #b05a9a, #1a0a2a)" },
+    [T(NARR, "雲の上の庭。星のかたちの花が、ゆらゆらゆれている。"), T(FLORA, "いらっしゃい！ …その子、ポポちゃんでしょ？ おほしさまが、うわさしてたよ。"),
+     T(FLORA, "でも、星のかけらは、花のなかにかくれているの。ぜんぶ見つけるまで、帰さないよ！")],
+    [T(FLORA, "みつけた…！ えへへ、きみたちの勝ち。"), T(NARR, "【星のかけら ② を手に入れた！】"),
+     T(NARR, "ふたつのかけらが、ポポのまわりを、くるくるまわった。ポポの体が、ぼんやり光る。"),
+     T(POPO, "……あ……あり……がとう……。"), T(LUMI, "ポポが、しゃべった！？"), T(POPO, "ポポ……こわい。ヨルモグ、くる……。")],
+    [T(FLORA, "もうちょっと、がんばって〜！")]),
+  P4("🕳️", "夜喰いヨルモグ", "ヨルモグ、あらわる", { p: 12, m: .9, t: 6, h: 1.5, rw: { coin: 900, shard: 7 }, bg: "radial-gradient(circle at 50% 40%, #1a0530, #000)" },
+    [T(NARR, "ふたつのかけらが、空にうかんだ、そのとき。空が、まっ黒にぬりつぶされた。"), T(YORU, "……ミツケタ……ホシノ、コ……。"), T(POPO, "にゃっ…！"),
+     T(NARR, "黒い口が、ポポをのみこもうとする。"), T(HERO, "ポポ！！ させない！")],
+    [T(YORU, "……ヨルモグ……ニゲル……。ポポ……モラッタ……。"), T(NARR, "影は、ポポをつれて、夜の奥へ消えた。"), T(HERO, "…追おう。ぜったい、助ける。"),
+     T(LUMI, "ポポの力が、ヨルモグをひきよせてるんだ。でも、きっと、ポポ自身にも、まだ知らない力がある。")],
+    [T(YORU, "……オソイ……。")]),
+  P4("🐾", "ポポ（ぼうそう）", "ポポの正体", { p: 12, m: .9, t: 4, b: true, h: 1.7, rw: { coin: 1100, shard: 8 }, bg: "radial-gradient(circle at 50% 50%, #5a3a9a, #05030f)" },
+    [T(NARR, "夜のまんなか。黒い雲のなかで、ポポが、ひとりで、うずくまっていた。"), T(POPO, "……こないで……ポポ……こわれちゃう……。"),
+     T(NARR, "ポポの体から、星のひかりが、あふれだす。"), T(LUMI, "ヨルモグが、むりやり力をひきだしてる！ ぼうそうしてる！"), T(HERO, "だいじょうぶ。ぼくが、受けとめる！")],
+    [T(POPO, "……あったかい……。"), T(POPO, "ポポ、思い出した。ポポは……星のたまごの、こども……。"), T(POPO, "世界の『あした』を、ねむらせないために、うまれたの。"),
+     T(HERO, "いっしょに、ヨルモグをたおそう。"), T(POPO, "…うん！"), T(NARR, "ポポの星のひかりが、勇者の剣にやどった。")],
+    [T(POPO, "……だめ……ポポ……とまらない……。")]),
+  P4("🌌", "夜喰いヨルモグ・完全体", "星のたまご、ふたたび", { p: 12, m: 1, t: 6, b: true, h: 2, rw: { coin: 1800, shard: 12 }, bg: "radial-gradient(circle at 50% 50%, #2a0a5a, #000)" },
+    [T(NARR, "夜がせかいをのみこむ。星が、ひとつ、またひとつと、きえていく。"), T(YORU2, "……ヨル……ゼンブ……ワレノ……。"), T(HERO, "ポポが、ぼくたちに、勇気をくれた。"),
+     T(POPO, "ポポ、まもる！ みんなの、あした！"), T(LUMI, "いこう、みんな！ ぜんぶ、ぶつけよう！")],
+    [T(YORU2, "……アタタカイ……ヒカリ……。"), T(NARR, "影は、ほどけて、無数の星にもどった。空に、大きな星のたまごが、ふたたび、うかんだ。"),
+     T(POPO, "ありがとう。ポポ、もどらなきゃ。…でも、ひとつだけ。"), T(NARR, "ポポの体が、小さなたまごにかわり、勇者の手のなかに、おさまった。"),
+     T(POPO, "この子を、育てて。この子が、ポポの、あした。"), T(HERO, "…うん。やくそくする。"), T(AYA, "星守りの村の鐘が、ひびいておるよ。…よい旅じゃったのう。"),
+     T(NARR, "――第四章「ねむれる星のたまご」 完――")],
+    [T(YORU2, "……ヨル……ヨコセ……。")])
+);
 
 function speakHit(p, v, s, type){
   const k = keyOf(p), L = CV[k];
@@ -1491,7 +1586,7 @@ let pendingReward = null;
 function backfillGear(){
   const want = [];
   for (let st = 0; st < CH.length; st++) {
-    const cleared = st < CH.length - 1 ? st < (SAVE.ch || 0) : !!(SAVE.flag && SAVE.flag.end2);
+    const cleared = st < CH.length - 1 ? st < (SAVE.ch || 0) : !!(SAVE.sg && SAVE.sg[st]);
     if (cleared) (STORY_GEAR[st] || []).forEach(id => want.push(id));
   }
   for (const [f, id] of Object.entries(TOWER_GEAR)) if (+f <= ((SAVE.stats || {}).towerBest || 0)) want.push(id);
@@ -1548,6 +1643,7 @@ const ELS = { "火": { c: "#ff6a3a", e: "🔥" }, "水": { c: "#4aa8ff", e: "�
 const TAG_EL = { dragon: "火", knight: "水", wind: "木", holy: "光", dark: "闇" };
 const CARD_EL = { "🐉": "火", "🔥": "火", "👹": "火", "🪓": "火", "🛡️": "水", "🔮": "水", "🐍": "水", "🦅": "木", "🏹": "木", "🐺": "木", "⚔️": "光", "👑": "光", "⚡": "光", "💀": "闇", "🦇": "闇", "🧙": "闇" };
 const ENEMY_EL = { "🦇": "闇", "🐺": "水", "🛡️": "光", "🧙": "闇", "👹": "火", "🐉": "火", "🎭": "闇", "🌑": "闇", "🐙": "水", "🗿": "木", "🧝": "木", "🪞": "闇", "🔮": "闇", "☠️": "闇", "🧓": "光", "🧚": "光", "🎃": "火", "🌙": "水", "🔥": "火", "💧": "水", "🌲": "木", "🪙": "光", "🏔️": "木", "☀️": "光", "⏳": "闇" };
+Object.assign(ENEMY_EL, { "🌠": "光", "🐀": "闇", "🕳️": "闇", "🌌": "闇", "👵": "光", "🌸": "木", "🐾": "光" });
 const elAdv = (a, d) => ((a === "火" && d === "木") || (a === "木" && d === "水") || (a === "水" && d === "火") || (a === "光" && d === "闇") || (a === "闇" && d === "光")) ? 1 : ((a === "木" && d === "火") || (a === "水" && d === "木") || (a === "火" && d === "水")) ? -1 : 0;
 const PARTY_SL = ["co", "co2", "co3"];
 function partyOf(k){
@@ -1660,6 +1756,7 @@ function clearGhost(){ cards.forEach(x => x.classList.remove("ghost")); }
 function setGhost(x){ const b = x.querySelector(".back"); if (b) b.dataset.g = x.dataset.a; x.classList.add("ghost"); }
 function turnStart(k){
   turns[k]++;
+  if (k === 1 && CO.on) { try { wdRule(); } catch (e) {} }
   { const Bt = bf(k), [tx, ty] = fpos(k);
     if (Bt.tHeal && hp[k] > 0) { const h = Math.max(1, Math.round(hpMax[k] * Bt.tHeal)); hp[k] = Math.min(hpMax[k], hp[k] + h); popText("+" + h, tx, ty - 10, "#5dff8a", "clamp(1.2rem,5vw,2rem)"); }
     if (Bt.bregen && !shield[k] && rng() < Bt.bregen) { shield[k] = true; popText("🛡 バリア再生", tx, ty + 30, "#7ab8ff", "clamp(1.1rem,5vw,1.8rem)"); }
@@ -1753,7 +1850,7 @@ const compOf2 = id => { const c = id && COMPS[id]; return c && compUnlocked(c) ?
 let SAVE = { diff: 1, coins: 1000, inv: {}, eq: null, eq2: null, day: "", ch: 0, flag: {}, streak: 0, stats: {}, m: {}, ac: {}, pity: {}, gi: {}, ld: [{}, {}], sg: {} };
 try { const t = localStorage.getItem("shinkei_save"); if (t) SAVE = Object.assign(SAVE, JSON.parse(t)); } catch (e) {}
 FLAG = SAVE.flag || {};
-function migrateCh(){ if ((SAVE.ch || 0) >= 13 && FLAG && FLAG.end2) SAVE.ch = Math.max(SAVE.ch, 14); }
+function migrateCh(){ if ((SAVE.ch || 0) >= 13 && FLAG && FLAG.end2) SAVE.ch = Math.max(SAVE.ch, 14); if (SAVE.sg && SAVE.sg[21] && (SAVE.ch || 0) <= 21) SAVE.ch = 22; }
 migrateCh();
 function save(){ try { localStorage.setItem("shinkei_save", JSON.stringify((typeof NET !== "undefined" && NET.real) ? Object.assign({}, SAVE, NET.real) : SAVE)); } catch (e) {} }
 function updateCoins(){ $("coinN").textContent = SAVE.coins; $("gc").textContent = SAVE.coins; if ($("mc")) $("mc").textContent = SAVE.coins; if ($("gs")) $("gs").textContent = shards(); }
@@ -2421,7 +2518,7 @@ function netBegin(){
   $("onl").classList.remove("show"); document.body.classList.remove("gz");
   closeAllOv("");
   levelSel.value = String(NET.deck.n); modeSel.value = CO.on ? "cpu" : "2p"; lastMode = "online";
-  start(true); $("chap").classList.add("show"); $("chap").textContent = CO.on ? "🤝 協力：" + CO.en.e + " " + CO.en.name : "🌐 オンライン対戦" + (NET.peerName ? "  vs " + NET.peerName : "");
+  start(true); $("chap").classList.add("show"); $("chap").textContent = CO.on ? "🤝 協力：" + CO.en.e + " " + CO.en.name + (CO.en.rule ? " ⚠️" + WD_RULE[CO.en.rule][0] : "") : "🌐 オンライン対戦" + (NET.peerName ? "  vs " + NET.peerName : "");
 }
 function netHostStart(){
   if (!NET.tr || !NET.peerProf) return;
@@ -2434,7 +2531,7 @@ function netHostStart(){
   netBegin();
 }
 function netSnapData(){
-  return { q: NET.seq, cur, hp: hp.slice(), sp: sp.slice(), sc: scores.slice(), m: matchedCount, shield: shield.slice(), skip: skip.slice(), streak, turns: turns.slice(), cw: CO.who,
+  return { q: NET.seq, cur, hp: hp.slice(), sp: sp.slice(), sc: scores.slice(), m: matchedCount, shield: shield.slice(), skip: skip.slice(), streak, turns: turns.slice(), cw: CO.who, lk: LK,
     mt: cards.map(c => c.classList.contains("gone") ? "3" : c.classList.contains("matched") ? (c.classList.contains("m0") ? "1" : "2") : "0").join(""), rs: NET.rs ? NET.rs.get() : 0 };
 }
 function netApplySnap(d){
@@ -2444,7 +2541,7 @@ function netApplySnap(d){
   first = null; mem = {};
   hp = arr(d.hp, 2) || hp; sp = arr(d.sp, 2) || sp; scores = arr(d.sc, 2) || scores; turns = arr(d.turns, 2) || turns;
   shield = [!!(d.shield && d.shield[0]), !!(d.shield && d.shield[1])]; skip = [!!(d.skip && d.skip[0]), !!(d.skip && d.skip[1])];
-  matchedCount = d.m | 0; streak = d.streak | 0; cur = d.cur === 1 ? 1 : 0; if (CO.on && (d.cw === 1 ? 1 : 0) !== CO.who) { CO.who = d.cw === 1 ? 1 : 0; refreshLook(); } NET.seq = d.q | 0; if (NET.rs && NET.rs.set) NET.rs.set(d.rs | 0);
+  LK = d.lk | 0; matchedCount = d.m | 0; streak = d.streak | 0; cur = d.cur === 1 ? 1 : 0; if (CO.on && (d.cw === 1 ? 1 : 0) !== CO.who) { CO.who = d.cw === 1 ? 1 : 0; refreshLook(); } NET.seq = d.q | 0; if (NET.rs && NET.rs.set) NET.rs.set(d.rs | 0);
   updateUI(); gtoast("🔄 画面をそろえました");
 }
 function netPump(){
@@ -2522,7 +2619,7 @@ function onlRender(){
     b.innerHTML = `<div class="evcard" style="text-align:center">つないでいます…<div class="onlcode" style="font-size:1.6rem">${NET.code}</div></div>${bye}`;
   } else if (NET.state === "linked") {
     const pp = NET.peerProf, ow = !!pp;
-    const coCtl = NET.host ? `<div class="evcard"><b>あそびかた</b><div class="gbtns"><button class="ctl" id="onlmv" style="${NET.coSel ? "" : "outline:3px solid #ffe14d"}">⚔️ たいせん</button><button class="ctl" id="onlmc" style="${NET.coSel ? "outline:3px solid #ffe14d" : ""}">🤝 きょうりょく</button></div>${NET.coSel ? `<select id="onlboss" class="ctl" style="width:100%;margin-top:6px;padding:8px">${COB().map((c, i) => `<option value="${i}" ${i === NET.bossIdx ? "selected" : ""}>${c.e} ${c.name}</option>`).join("")}</select><small>ふたりで交代でめくって、ボスをたおそう！ ボスは自動で動きます。</small>` : `<small>ふたりで たいけつ</small>`}</div>` : "";
+    const coCtl = NET.host ? `<div class="evcard"><b>あそびかた</b><div class="gbtns"><button class="ctl" id="onlmv" style="${NET.coSel ? "" : "outline:3px solid #ffe14d"}">⚔️ たいせん</button><button class="ctl" id="onlmc" style="${NET.coSel ? "outline:3px solid #ffe14d" : ""}">🤝 きょうりょく</button></div>${NET.coSel ? `<select id="onlboss" class="ctl" style="width:100%;margin-top:6px;padding:8px"><option value="${100 + nowD().getDay()}" ${NET.bossIdx === 100 + nowD().getDay() ? "selected" : ""}>🔥 きょうのボス：${wdBoss(nowD().getDay()).e} ${wdBoss(nowD().getDay()).name}</option>${COB().map((c, i) => `<option value="${i}" ${i === NET.bossIdx ? "selected" : ""}>${c.e} ${c.name}</option>`).join("")}</select><small>ふたりで交代でめくって、ボスをたおそう！ ボスは自動で動きます。<br>🔗 ペアをそろえるとリンクがたまり、100%でバースト（追加ダメージ＋回復）！ ミスしたカードは、ふたりに見えるよ。${NET.bossIdx >= 100 ? `<br>⚠️ ${WD_RULE[wdBoss(NET.bossIdx - 100).rule][0]}：${WD_RULE[wdBoss(NET.bossIdx - 100).rule][1]}` : ""}</small>` : `<small>ふたりで たいけつ</small>`}</div>` : "";
     b.innerHTML = `<div class="evcard" style="text-align:center">✅ ${NET.peerName ? socEsc(NET.peerName) + "さんと" : ""}つながったよ！<br>${NET.host ? (ow ? "「バトル開始」でスタート！" : "ともだちの準備をまっています…") : "ホストがはじめるのをまっています…"}<br>${NET.coSel ? "" : `<small>カードの数はホストが決めます（いまの設定：${levelSel.value === "6" ? "12枚" : levelSel.value === "8" ? "16枚" : "24枚"}）</small>`}</div>
       ${coCtl}${NET.host ? `<button class="ctl" id="onlstart" ${ow ? "" : "disabled"}>⚔️ バトル開始</button>` : ""}${bye}`;
     const st = $("onlstart"); if (st) st.onclick = () => netHostStart();
@@ -2666,6 +2763,8 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) { so
 const PET_XP = [8, 60, 200];
 const PET_NAME = { 0: ["たまご"], 1: ["こねこ"], 2: ["", "ぶんぶんニャ", "ふわにゃん", "いたずらニャ"], 3: ["", "ニャイト（騎士）", "ニャンシェル（姫）", "ニャックス（怪盗）"] };
 const PET_TYPE = ["", "⚔️ たたかうタイプ", "💖 なかよしタイプ", "😼 やんちゃタイプ"];
+const petUnlocked = () => !!(SAVE.petU || (SAVE.pet && SAVE.pet.xp > 0));
+function petUnlock(){ SAVE.petU = true; if (!SAVE.pet || !SAVE.pet.xp) SAVE.pet = { s: 0, ty: 0, xp: 0, cb: 0, cc: 0, cn: 0, f: 80, h: 70, p: 0, pa: 0, hung: false, t: Date.now(), pl: 0 }; save(); }
 function petGet(){
   if (!SAVE.pet) SAVE.pet = { s: 0, ty: 0, xp: 0, cb: 0, cc: 0, cn: 0, f: 80, h: 70, p: 0, pa: 0, hung: false, t: Date.now(), pl: 0 };
   return SAVE.pet;
@@ -2681,7 +2780,7 @@ function petTick(){
   return P;
 }
 function petBuff(){
-  const P = petGet(); if (P.s === 0) return {};
+  const P = petGet(); if (P.s === 0 || !petUnlocked()) return {};
   const m = P.f >= 20 ? 1 : .5, T = {
     1: { 1: {}, 2: { atk: .03 }, 3: { atk: .06, crit: .04 } },
     2: { 1: {}, 2: { spGain: .04 }, 3: { spGain: .08, coin: .05 } },
@@ -2704,6 +2803,7 @@ function petEvolveCheck(){
 let petEvo = "";
 function petAddXp(n){ const P = petGet(); P.xp = Math.min(1023, P.xp + n); return petEvolveCheck(); }
 function petEv(key){
+  if (!petUnlocked()) return;
   petEvo = "";
   const P = petTick(); if (P.s === 0) { petAddXp(key === "win" ? 3 : 2); P.cb = Math.min(255, P.cb + 1); save(); updateBadge(); return; }
   P.cb = Math.min(255, P.cb + (key === "win" ? 2 : 1)); const m = petAddXp(key === "win" ? 3 : 2); if (m && typeof popText === "function") popText(m, innerWidth / 2, 120, "#ffe9a8", "clamp(1.2rem,5vw,2rem)");
@@ -2745,6 +2845,7 @@ function petMood(P){ return P.f < 20 || P.h < 25 || P.p >= 2 ? "sad" : (P.h >= 7
 let petMsg = "";
 function petBar(label, v, col){ return `<div class="pbar"><span>${label}</span><i><b style="width:${Math.round(v)}%;background:${col}"></b></i></div>`; }
 function renderPet(){
+  if (!petUnlocked()) { $("pbody").innerHTML = `<div class="pview" style="padding:28px 10px;text-align:center"><div style="font-size:4rem">🔒</div><div style="font-size:3rem;opacity:.5">🥚</div></div><div class="pmsg" style="line-height:1.6">第4章「ねむれる星のたまご」を<br>クリアすると、ペットのたまごがもらえるよ！</div><div class="gnote">ストーリーを進めよう。ポポが、まっているよ。</div>`; return; }
   const P = petTick(), mood = petMood(P); save();
   const stName = ["たまご", "こども", "せいちょうき", "おとな"][P.s], next = P.s < 3 ? PET_XP[P.s] : 0, prev = P.s > 0 ? PET_XP[P.s - 1] : 0;
   const grow = P.s < 3 ? Math.min(100, (P.xp - prev) / (next - prev) * 100) : 100;
@@ -2779,7 +2880,7 @@ function encodeSave(){
   const f = SAVE.flag || {}, S = SAVE.stats || {};
   let s = "";
   const W = (v, n) => { v = Math.max(0, Math.min(Math.pow(2, n) - 1, v | 0)); s += v.toString(2).padStart(n, "0"); };
-  W(16, 8); W(SAVE.coins, 21); W(SAVE.ch || 0, 5); W(wIdx(SAVE.eq), 6); W(wIdx(SAVE.eq2), 6);
+  W(17, 8); W(SAVE.coins, 21); W(SAVE.ch || 0, 5); W(wIdx(SAVE.eq), 6); W(wIdx(SAVE.eq2), 6);
   W(f.trust || 0, 2); W(f.end === "king" ? 1 : f.end === "wander" ? 2 : 0, 2); W(f.end2 === "join" ? 1 : f.end2 === "seal" ? 2 : 0, 2);
   WEAPONS.forEach(w => W(Math.min(7, SAVE.inv[w.id] || 0), 3));
   W(S.pair, 16); W(S.win, 12); W(S.pull, 12); W(S.combo3, 12); W(S.special, 12); W(S.towerBest, 8); W(SAVE.streak, 5);
@@ -2799,7 +2900,7 @@ function encodeSave(){
   SKINS.slice(SKINS_LEG).forEach(x => W(Math.min(3, SK().own[x.id] || 0), 2)); GEAR.slice(GEAR_LEG).forEach(g => W(Math.min(7, SAVE.gi[g.id] || 0), 3)); W(SK().sp || 0, 9); W((SAVE.gg || {}).pity || 0, 7);
   WEAPONS.filter(w => w.r >= 5).forEach(w => W(Math.min(TR_MAX(w), trLv(w.id)), 3));
   ARMORS.forEach(g => W(gaLv(g.id), 2)); ARMORS.filter(g => g.r >= 5).forEach(g => W(Math.min(3, gtLv(g.id)), 3));
-  { const P = petGet(); W(P.s, 2); W(P.ty, 2); W(P.xp, 10); W(P.cb, 8); W(P.cc, 8); W(P.cn, 4); }
+  { const P = petGet(); W(P.s, 2); W(P.ty, 2); W(P.xp, 10); W(P.cb, 8); W(P.cc, 8); W(P.cn, 4); W(petUnlocked() ? 1 : 0, 1); }
   const bytes = []; for (let i = 0; i < s.length; i += 8) bytes.push(parseInt(s.slice(i, i + 8).padEnd(8, "0"), 2));
   W(crc16(bytes), 16);
   const b = s + "0".repeat((5 - s.length % 5) % 5);
@@ -2828,7 +2929,7 @@ function decodeV4(bits, ver){
     let gad = null, gtd = null; 
     let trd = null; if (ver >= 14) { trd = {}; WEAPONS.filter(w => w.r >= 5).forEach(w => { const n = R(3); if (n) trd[w.id] = Math.min(n, TR_MAX(w)); }); }
     if (ver >= 15) { gad = {}; gtd = {}; ARMORS.forEach(g => { const n = R(2); if (n) gad[g.id] = Math.min(2, n); }); ARMORS.filter(g => g.r >= 5).forEach(g => { const n = R(3); if (n) gtd[g.id] = Math.min(3, n); }); }
-    let pet = null; if (ver >= 16) { pet = { s: R(2), ty: R(2), xp: R(10), cb: R(8), cc: R(8), cn: R(4) }; }
+    let pet = null; if (ver >= 16) { pet = { s: R(2), ty: R(2), xp: R(10), cb: R(8), cc: R(8), cn: R(4) }; pet.u = ver >= 17 ? R(1) : (pet.xp > 0 ? 1 : 0); }
     const end = pos, crc = R(16), body = bits.slice(0, end), bytes = [];
     for (let i = 0; i < body.length; i += 8) bytes.push(parseInt(body.slice(i, i + 8).padEnd(8, "0"), 2));
     if (crc16(bytes) !== crc) return null;
@@ -2841,7 +2942,7 @@ function decodeSave(str){
   const clean = str.toUpperCase().replace(/[^A-Z0-9]/g, "").replace(/O/g, "0").replace(/I/g, "1");
   let b = ""; for (const ch of clean) { const k = B32.indexOf(ch); if (k < 0) return null; b += k.toString(2).padStart(5, "0"); }
   const vv = b.length >= 8 ? parseInt(b.slice(0, 8), 2) : 0;
-  if (vv >= 4 && vv <= 16) return decodeV4(b, vv);
+  if (vv >= 4 && vv <= 17) return decodeV4(b, vv);
   return decodeLegacy(str);
 }
 function decodeLegacy(str){
@@ -2898,7 +2999,7 @@ $("pwload").onclick = () => {
   migrateCh(); stmUpdate(); renderDiff();
   if (d.trd) SAVE.tr = d.trd;
   if (d.gad) { SAVE.ga = d.gad; SAVE.gt = d.gtd; }
-  if (d.pet) { SAVE.pet = Object.assign({}, d.pet, { f: 70, h: 70, p: 0, pa: 0, hung: false, t: Date.now(), pl: 0 }); }
+  if (d.pet) { SAVE.petU = !!d.pet.u; SAVE.pet = Object.assign({}, d.pet, { f: 70, h: 70, p: 0, pa: 0, hung: false, t: Date.now(), pl: 0 }); }
   if (d.evo) { SAVE.evo = d.evo; SAVE.mat = { shard: d.shards || 0 }; updateCoins(); }
   if (d.evt) { const H = HAL(); H.p = d.evt.p; H.story = Math.max(H.story || 0, d.evt.story); save(); }
   save(); updateCoins(); stage = Math.min(stage, SAVE.ch); buildChSel(); updateUI(); updateBadge(); refreshLook(); renderEq();
@@ -2951,7 +3052,7 @@ function unclaimedN(){
   ACH.forEach(a => { if (!(SAVE.ac || {})[a[0]] && a[2]() >= a[3]) n++; });
   return n;
 }
-function updateBadge(){ const n = unclaimedN(), d = $("msdot"); d.style.display = n ? "inline-block" : "none"; d.textContent = n; try { petTick(); const pd = $("petdot"); pd.style.display = petAlert() ? "inline-block" : "none"; pd.textContent = "!"; } catch (e) {} }
+function updateBadge(){ const n = unclaimedN(), d = $("msdot"); d.style.display = n ? "inline-block" : "none"; d.textContent = n; try { const un = petUnlocked(); if (un) petTick(); const pd = $("petdot"); pd.style.display = un && petAlert() ? "inline-block" : "none"; pd.textContent = "!"; $("btnPet").querySelector("span").textContent = un ? "🐾" : "🔒"; } catch (e) {} }
 setInterval(() => { try { updateBadge(); } catch (e) {} }, 60000);
 function ev(key, n = 1){
   if (key === "battle" || key === "win") { try { petEv(key); } catch (e) {} }
@@ -3405,7 +3506,7 @@ function showStory(lines, done, bg){
   };
   show();
 }
-const PARTS = [ { n: "第1章", t: "竜の王冠", from: 0, to: 7 }, { n: "第2章", t: "闇の巫女と虚無の王", from: 8, to: 13 }, { n: "第3章", t: "止まった七曜日", from: 14, to: 999 } ];
+const PARTS = [ { n: "第1章", t: "竜の王冠", from: 0, to: 7 }, { n: "第2章", t: "闇の巫女と虚無の王", from: 8, to: 13 }, { n: "第3章", t: "止まった七曜日", from: 14, to: 21 }, { n: "第4章", t: "ねむれる星のたまご", from: 22, to: 999 } ];
 const partOf = i => PARTS.find(p => i >= p.from && i <= p.to) || PARTS[0];
 const epLabel = i => { const p = partOf(i); return `${p.n} 第${i - p.from + 1}話`; };
 const isCleared = i => i < (SAVE.ch || 0) || !!(SAVE.sg && SAVE.sg[i]);
@@ -3464,12 +3565,13 @@ function storyAfter(won){
   SAVE.ch = Math.max(SAVE.ch || 0, Math.min(stage + 1, CH.length - 1)); SAVE.sg[stage] = true; save();
   const extra = [];
   if (first) (STORY_GEAR[stage] || []).forEach(id => { const r = grantGear(id); extra.push(T(NARR, `🎁 ${r.g.icon}『${r.g.name}』を手に入れた！${r.isNew ? "" : `（Lv${r.lv}）`}`)); });
+  if (first && last && !SAVE.petU) { petUnlock(); extra.push(T(NARR, "🥚 星のたまごを手に入れた！ 「ペット」のタブから、育てよう！")); }
   if (first) { stmAdd(1); let t = "⚡ 行動力が1回復した！"; if (ch.rw) { addCoins(ch.rw.coin || 0); if (ch.rw.shard) addShard(ch.rw.shard); t = `🎁 🪙+${ch.rw.coin || 0}${ch.rw.shard ? `　🔷+${ch.rw.shard}` : ""}　⚡+1`; } extra.push(T(NARR, t)); }
   COMP_IDS.filter(id => compUnlocked(COMPS[id]) && !before.includes(id)).forEach(id => extra.push(T(NARR, `${COMPS[id].e} 仲間「${COMPS[id].name}」を「そうび」できるようになった！`)));
   showStory(withBg([...ch.win, ...extra]), () => {
     if (!last) { stage++; buildChSel(); playChapter(false); return; }
     const e = FLAG.end2 === "join" ? "星夜" : "守護";
-    $("winicon").textContent = "👑"; $("winmsg").textContent = `全章クリア！ 〈${e}〉エンド＋第三部クリア（「バトル開始」でもう一度）`;
+    $("winicon").textContent = "👑"; $("winmsg").textContent = `全章クリア！ 〈${e}〉エンド＋第四章クリア（ペットのたまごをもらった！）`;
     $("win").classList.add("show"); sfx.win(); say("ぜんしょう、クリア！ おめでとう！");
     shake(5); flash(5); rain(6000, ["👑", "🐉", "⚔️", "🛡️", "🔥", "⚡"]);
     burst(innerWidth / 2, innerHeight / 2, 200, "👑", 2.2);
@@ -5508,7 +5610,7 @@ function updateUI(){
     $("hp" + k).className = h / hpMax[k] < .3 ? "low" : "";
     $("sp" + k).style.width = sp[k] + "%";
     $("sp" + k).className = sp[k] >= 100 ? "full" : "";
-    $("p" + k).textContent = `ペア ${scores[k]}　必殺ゲージ ${sp[k]}%${shield[k] ? "　🛡️バリア" : ""}${skip[k] ? "　⛓️封印" : ""}${eqOf(k) && (k === 0 || modeSel.value === "2p") ? "　" + eqOf(k).icon : ""}`;
+    $("p" + k).textContent = `ペア ${scores[k]}　必殺ゲージ ${sp[k]}%${shield[k] ? "　🛡️バリア" : ""}${skip[k] ? "　⛓️封印" : ""}${CO.on && k === 0 ? "　🔗リンク " + LK + "%" : ""}${eqOf(k) && (k === 0 || modeSel.value === "2p") ? "　" + eqOf(k).icon : ""}`;
     $("pl" + k).classList.toggle("active", cur === k);
   }
   $("msg").textContent = matchedCount === total ? "" : CO.on && cur === 0 ? `🤝 ${coWhoName()}の番！` : `${n[cur]}の攻撃！`;
@@ -5546,7 +5648,7 @@ function start(announce){
   if (story) { if (stage >= 1) sp[0] = 25; if (stage >= 3) shield[0] = true; if (stage >= 6) sp[0] = 50; if (stage >= 11) sp[0] = 70; if (stage >= 13) sp[0] = 90; }
   for (const k of [0, 1]) { const B = bfS(k); if (B.spStart) sp[k] = Math.min(100, sp[k] + Math.round(B.spStart)); if (B.shield) shield[k] = true; }
   if (modeSel.value !== "2p") sp[1] = Math.min(100, sp[1] + dif().sp);
-  turns = [0, 0]; revived = [false, false]; breath = [false, false]; miracleUsed = [false, false]; endureUsed = [false, false]; DOT = [null, null]; rw = [0, 0];
+  turns = [0, 0]; revived = [false, false]; breath = [false, false]; miracleUsed = [false, false]; endureUsed = [false, false]; DOT = [null, null]; rw = [0, 0]; LK = 0;
   $("win").classList.remove("show", "lose");
   board.style.gridTemplateColumns = `repeat(${n === 12 ? 6 : 4}, 1fr)`;
   const picks = NET.on && NET.deck ? NET.deck.picks.slice() : shuffle([...ANIMALS]).slice(0, n);
@@ -5576,7 +5678,37 @@ function bfOfHuman(h){ const w = CO.who; CO.who = h; const B = bf(0); CO.who = w
 function bfS(k){ if (!(CO.on && k === 0)) return bf(k); const a = bfOfHuman(0), b = bfOfHuman(1); return { hp: ((a.hp || 0) + (b.hp || 0)) / 2, spStart: ((a.spStart || 0) + (b.spStart || 0)) / 2, shield: !!(a.shield || b.shield) }; }
 function curFlip(){ cur = 1 - cur; if (CO.on && cur === 0) { CO.who = 1 - CO.who; refreshLook(); } }
 const COB = () => CH.filter(c => c.boss);
-function coBoss(i){ const L = COB(), k = Math.max(0, Math.min(L.length - 1, i | 0)), c = L[k]; return { e: c.e, name: c.name, theme: c.theme, bg: c.bg, boss: true, pairs: c.pairs, mem: c.mem, hpMul: (c.hpMul || 1) * 1.7, reward: 140 + 30 * k }; }
+const WD_NAMES = ["日", "月", "火", "水", "木", "金", "土"];
+const WD_RULE = { heal: ["再生", "ボスのターンごとにHPが3%回復する"], seal: ["封印の瞳", "ボスのターン開始時、25%で次の味方のターンが封印される"], fire: ["業火", "3ターンごとに、バリアを貫通する炎が飛んでくる"], shuffle: ["シャッフル", "3ターンごとに、場のカードがシャッフルされる"], barrier: ["大地のバリア", "4ターンごとに、ボスにバリアが張られる"], rage: ["怒り", "ボスのHPが30%以下になると、攻撃が1.5倍になる"], armor: ["かたい鎧", "2連続以上そろえないと、ボスへのダメージが30%減る"] };
+const WDB = [
+  { e: "🐉", name: "黄金竜サンドラゴ", rule: "heal", theme: 4, bg: "radial-gradient(circle at 50% 20%, #8a6a10, #120a02)" },
+  { e: "🔮", name: "月影の魔女ルナリア", rule: "seal", theme: 6, bg: "radial-gradient(circle at 50% 30%, #2a3a7a, #04050f)" },
+  { e: "👹", name: "炎帝ブレイズ", rule: "fire", theme: 3, bg: "radial-gradient(circle at 50% 80%, #c0400a, #1a0502)" },
+  { e: "🐙", name: "深海の主クラーケン", rule: "shuffle", theme: 1, bg: "radial-gradient(circle at 50% 30%, #0a4a7a, #020a14)" },
+  { e: "🗿", name: "古樹の巨人ガイア", rule: "barrier", theme: 2, bg: "radial-gradient(circle at 50% 30%, #2a6a2a, #04100a)" },
+  { e: "🎭", name: "怪盗ファントム", rule: "rage", theme: 5, bg: "radial-gradient(circle at 50% 20%, #6a1a40, #0c0208)" },
+  { e: "☠️", name: "終末の騎士ヴォルグ", rule: "armor", theme: 6, bg: "radial-gradient(circle at 50% 50%, #2a1a3a, #000)" }
+];
+const wdBoss = d => { const b = WDB[((d % 7) + 7) % 7]; return { e: b.e, name: `【${WD_NAMES[d % 7]}曜日】${b.name}`, theme: b.theme, bg: b.bg, boss: true, pairs: 12, mem: .96, hpMul: 2.8, atk: 1.25, reward: 520, rule: b.rule, wd: d % 7 }; };
+let LK = 0;
+function coLink(win){
+  if (!CO.on || cur !== 0) return;
+  LK = Math.min(100, LK + 12 + 4 * streak);
+  if (LK >= 100) {
+    LK = 0; const d = takeDmg(1, Math.max(1, Math.round(hpMax[1] * .06)), { pierce: true }), h = Math.round(hpMax[0] * .08); hp[0] = Math.min(hpMax[0], hp[0] + h);
+    const [bx, by] = fpos(1); popText("🔗 リンクバースト！ -" + d, bx, by + 60, "#7ad8ff", "clamp(1.4rem,6vw,2.4rem)"); try { burst(bx, by, 60, "🔗", 1.3); flash(3); } catch (e) {} if (sfxOn) [523, 784, 1047, 1568].forEach((f, i) => tone(f, .2, "triangle", .14, i * .07));
+  }
+}
+function wdRule(){
+  const en = CO.en; if (!(CO.on && en && en.rule)) return; const t = turns[1], my = token, pop = (m, c) => { const [x, y] = fpos(1); popText(m, x, y + 70, c, "clamp(1.2rem,5vw,2rem)"); };
+  if (en.rule === "heal") { const h = Math.round(hpMax[1] * .03); hp[1] = Math.min(hpMax[1], hp[1] + h); pop("再生 +" + h, "#5dff8a"); }
+  if (en.rule === "seal" && rng() < .25) { skip[0] = true; pop("🔮 封印の瞳！", "#b388ff"); }
+  if (en.rule === "fire" && t % 3 === 0) { const d = takeDmg(0, Math.round(hpMax[0] * .12), { pierce: true }); pop("🔥 業火 -" + d, "#ff8a3a"); try { hurt(0); } catch (e) {} if (hp[0] <= 0) setTimeout(() => { if (my === token) finish(true); }, 900); }
+  if (en.rule === "shuffle" && t % 3 === 0) { gimShuffle(); pop("🌊 シャッフル！", "#7ab8ff"); }
+  if (en.rule === "barrier" && t % 4 === 0) { shield[1] = true; pop("🌿 大地のバリア", "#9dffb0"); }
+}
+function coBoss(i){
+  if (i >= 100) return wdBoss(i - 100); const L = COB(), k = Math.max(0, Math.min(L.length - 1, i | 0)), c = L[k]; return { e: c.e, name: c.name, theme: c.theme, bg: c.bg, boss: true, pairs: c.pairs, mem: c.mem, hpMul: (c.hpMul || 1) * 1.7, reward: 140 + 30 * k }; }
 const coWhoName = () => CO.who === NET.me ? "あなた" : (NET.peerName || "ともだち");
 function clearGlow(){ document.querySelectorAll(".card.glow").forEach(x => x.classList.remove("glow")); }
 function flashHint(c){
@@ -5609,6 +5741,7 @@ function pick(c){
       if (my !== token) return;
       [a, c].forEach(x => x.classList.remove("open", "wrong"));
       { if (partyOf(cur).some(x => x.id === "garett") && modeSel.value !== "2p") [a, c].forEach(setGhost);
+        if (CO.on && !isCpuTurn()) [a, c].forEach(setGhost);
         const Bm = bf(cur); if (Bm.mem && !isCpuTurn() && myTurnOf(cur) && Math.random() < Bm.mem) [a, c].forEach(setGhost); }
       const Br = bf(cur); let rewound = false;
       if (Br.rewind && rw[cur] < Math.floor(Br.rewind) && rng() < .4) { rw[cur]++; rewound = true; const [rx, ry] = fpos(cur); popText("⏳ 時がもどる！", rx + 40, ry + 60, "#ffe9a8", "clamp(1.2rem,5vw,2rem)"); }
@@ -5730,8 +5863,9 @@ function pairResolved(a, c, my){
       if (B.chain && streak > 1) base *= 1 + B.chain * (streak - 1);
       if (B.crit && rng() < B.crit) { base *= 2 + (B.critDmg || 0); crit = true; }
       const pm = partyBonus(cur, victim, CARD_EL[a.dataset.a]); base *= pm.mult;
+      if (CO.on && CO.en) { if (cur === 1) { if (CO.en.atk) base *= CO.en.atk; if (CO.en.rule === "rage" && hp[1] <= hpMax[1] * .3) base *= 1.5; } else if (CO.en.rule === "armor" && streak < 2) base *= .7; }
       const dmg = takeDmg(victim, Math.round(base), { pierce: !!B.pierce, cn: true });
-      NPX(cur, victim, B, dmg);
+      NPX(cur, victim, B, dmg); coLink();
       if (pm.el) { const [vx0, vy0] = fpos(victim); if (pm.mem.length) { popText(`${pm.mem.map(x => x.e).join("")}${ELS[pm.el].e} パーティこうげき！`, innerWidth / 2, innerHeight * .27, ELS[pm.el].c, "clamp(1.1rem,5vw,1.8rem)"); if (cur === 0 || modeSel.value === "2p") partyBounce(cur, pm.mem); } if (pm.adv > 0) popText("弱点！", vx0, vy0 + 60, "#ffea00", "clamp(1.3rem,6vw,2.1rem)"); else if (pm.adv < 0) popText("いまひとつ…", vx0, vy0 + 60, "#9ab", "clamp(1.1rem,5vw,1.8rem)"); }
       sp[cur] = Math.min(100, sp[cur] + Math.round((22 + streak * 6) * (1 + (B.spGain || 0)))); sp[victim] = Math.min(100, sp[victim] + 10);
       if (crit) { const [cx, cy] = fpos(victim); popText("会心の一撃！", cx, cy + 40, "#ffea00", "clamp(1.6rem,8vw,2.8rem)"); }
@@ -5878,6 +6012,7 @@ function finish(ko){
   else if (isSpecial()) reward = w === 0 ? (SPB.cur.reward || 100) : 30;
   if (NET.on) reward = w === NET.me ? 40 : 20;
   if (CO.on) reward = w === 0 ? (enemy().reward || 150) : 40;
+  let wdMsg = ""; if (CO.on && w === 0 && enemy().wd !== undefined) { const k = dayKey(nowD()), W = SAVE.wd = SAVE.wd || {}; if (W.k !== k) { W.k = k; addShard(4); wdMsg = "　💎かけら+4（きょうの初クリア！）"; } else { reward = Math.round(reward * .3); addShard(1); wdMsg = "　💎かけら+1"; } }
   const bn = [];
   if (w === 0 && modeSel.value !== "2p") {
     if (maxStreak >= 3) { reward += 20; bn.push("コンボ"); }
@@ -5888,7 +6023,7 @@ function finish(ko){
   { const cb = (CO.on ? bfOfHuman(NET.me) : bf(0)).coin || 0; if (cb && reward) { reward += Math.round(reward * cb); bn.push(`武器コイン+${Math.round(cb * 100)}%`); } }
   { const em = eventMul(); if (em > 1 && reward) { reward = Math.round(reward * em); bn.push(`イベント×${em}`); } }
   let limMsg = ""; { const lc = limCat(); if (lc && reward > 0) { if (limLeft(lc) <= 0) { reward = 0; bn.length = 0; limMsg = `　（きょうの${LIM_NAME[lc]}のごほうびは終わり。れんしゅうモード！）`; } else { limO()[lc] = (limO()[lc] || 0) + 1; limMsg = `　［きょうのごほうび 残り${limLeft(lc)}回］`; } } }
-  addCoins(reward); msg += halBattleMsg(w) + `　🪙+${reward}` + (bn.length ? `（ボーナス：${bn.join("・")}）` : "") + limMsg;
+  addCoins(reward); msg += halBattleMsg(w) + `　🪙+${reward}` + wdMsg + (bn.length ? `（ボーナス：${bn.join("・")}）` : "") + limMsg;
   ev("battle"); if (modeSel.value !== "2p" && w === 0) ev("win"); if (ko && w === 0) ev("ko");
   $("winicon").textContent = icon; $("winmsg").textContent = msg;
   $("win").classList.toggle("lose", lost); $("win").classList.add("show"); $("msg").textContent = ""; $("spBtn").style.display = "none";
