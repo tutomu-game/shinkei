@@ -446,6 +446,8 @@
     #cine .cname { bottom:6vh; font-size:clamp(1.4rem,6vw,2.4rem); }
     #win { margin-top:6px; padding:8px 14px; } #win .big { font-size:2rem; }
   }
+.card.glow{animation:glowp .7s ease-in-out infinite alternate;box-shadow:0 0 14px 4px #fff3a0,0 0 28px 8px #ffd24a88;z-index:2}
+@keyframes glowp{from{filter:brightness(1)}to{filter:brightness(1.5)}}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2a1442">
@@ -1346,13 +1348,49 @@ const WBUFF = {
   aut_sr:{spStart:20,atk:.08}, aut_hr:{spGain:.25,crit:.1}, aut_ur:{regen:.05,hp:.1,spAtk:.2}, aut_lr:{atk:.2,spAtk:.35,spStart:40,def:.12},
   win_sr:{heal:.3,regen:.02}, win_hr:{def:.15,hp:.12}, win_ur:{coin:.4,hp:.12,spGain:.2}, win_lr:{hp:.25,spAtk:.35,regen:.05,def:.15,coin:.3}
 };
+const NPROP = {
+  vamp: { n: "吸血", d: v => `与えたダメージの${Math.round(v * 100)}%をHP回復`, cap: .5 },
+  chase: { n: "追撃", d: v => `ペア成立時${Math.round(v * 100)}%で追加ダメージ`, cap: .6 },
+  chain: { n: "連鎖強化", d: v => `連続成功ごとにダメージ+${Math.round(v * 100)}%`, cap: .5 },
+  pierce: { n: "貫通", d: () => "相手のバリアを無視する" },
+  dot: { n: "継続ダメージ", d: v => `ペア成立で相手に3ターン継続（最大HPの${(v * 100).toFixed(1)}%/ターン）`, cap: .08 },
+  first: { n: "先制", d: v => `最初のペアのダメージ+${Math.round(v * 100)}%`, cap: 1 },
+  critDmg: { n: "会心強化", d: v => `会心ダメージ+${Math.round(v * 100)}%`, cap: 1 },
+  flash: { n: "ひらめき", d: v => `1枚めくったあと${Math.round(v * 100)}%で、正解を含む2枚が光る`, cap: .4 },
+  dbl: { n: "2回攻撃", d: v => `ペア成立時${Math.round(v * 100)}%でもう一度攻撃（半分の威力）`, cap: .5 },
+  mem: { n: "記憶", d: v => `ミスしたとき${Math.round(v * 100)}%で、そのカードがうっすら残る`, cap: .6 },
+  spKeep: { n: "ゲージ持越し", d: v => `必殺技のあとゲージが${Math.round(v)}%残る`, cap: 50 },
+  tHeal: { n: "毎ターン回復", d: v => `ターン開始時に最大HPの${(v * 100).toFixed(1)}%回復`, cap: .08 },
+  counter: { n: "反撃", d: v => `攻撃を受けたとき${Math.round(v * 100)}%で反撃`, cap: .6 },
+  resist: { n: "耐性", d: v => `封印を${Math.round(v * 100)}%で防ぐ`, cap: .9 },
+  guts: { n: "根性", d: v => `HPが半分以下のとき、受けるダメージ-${Math.round(v * 100)}%`, cap: .4 },
+  bregen: { n: "バリア再生", d: v => `ターン開始時${Math.round(v * 100)}%でバリアが張り直される`, cap: .5 },
+  flat: { n: "軽減", d: v => `受けるダメージ-${Math.round(v)}`, cap: 10 },
+  endure: { n: "踏ん張り", d: () => "HPが0になっても1回だけ耐える" },
+  cosmos: { x: 1, n: "宇宙の理", d: () => "必殺技のあと、全カードが一瞬見える" },
+  rewind: { x: 1, n: "時のまきもどし", d: v => `ミスしても、1戦闘に${Math.max(1, Math.floor(v))}回までターンが続く`, cap: 4 },
+  rainbow: { x: 1, n: "七色の祝福", d: v => `ペア成立時${Math.round(v * 100)}%で、回復・ゲージ・バリア・追加ダメージのどれかが発動`, cap: .6 },
+  prism: { x: 1, n: "プリズム", d: v => `3連続成功で必殺ゲージ+${Math.round(v)}`, cap: 50 },
+  capHit: { x: 1, n: "聖なる守り", d: v => `1回の被ダメージは最大HPの${Math.round(v * 100)}%まで`, cap: .5 },
+  purify: { x: 1, n: "浄化", d: () => "封印を完全に防ぐ" }
+};
+const npText = (k, v, m) => { const P = NPROP[k]; return [k, (P.x ? "✨専用：" : "") + P.n + "　" + P.d(v === true ? 1 : v * m), (P.x ? "✨" : "") + P.n]; };
+/* 武器・防具へ新プロパティを割り振り（レア度が高いほど数が多い。シークレットは専用効果つき） */
+Object.entries({
+  axe1:{first:.3}, saber:{chain:.1}, trident:{first:.3}, frost:{mem:.12}, soul:{vamp:.1}, dragonaxe:{chase:.2}, poseid:{mem:.15}, astral:{flash:.1},
+  drago:{dbl:.15}, ragna:{dot:.05}, ultima:{vamp:.12},
+  genesis:{dbl:.25, flash:.2, spKeep:30, rewind:2, cosmos:true}, iris:{dbl:.2, vamp:.15, pierce:true, rainbow:.35, prism:30},
+  spr_sr:{first:.3}, spr_hr:{chase:.15}, spr_ur:{vamp:.1}, spr_lr:{chain:.1}, sum_sr:{chase:.12}, sum_hr:{first:.3}, sum_ur:{dbl:.1}, sum_lr:{pierce:true},
+  aut_sr:{mem:.1}, aut_hr:{vamp:.08}, aut_ur:{flash:.08}, aut_lr:{dbl:.12}, win_sr:{first:.3}, win_hr:{mem:.12}, win_ur:{dot:.04}
+}).forEach(([id, b]) => { if (WBUFF[id]) Object.assign(WBUFF[id], b); });
 const BLBL = { hp:"最大HP", atk:"通常攻撃ダメージ", spAtk:"必殺技ダメージ", spGain:"必殺ゲージ増加", crit:"会心率", coin:"獲得コイン", heal:"回復効果" };
 const BSHORT = { hp:"HP", atk:"攻", spAtk:"必殺", def:"防", spGain:"ゲージ増", spStart:"ゲージ", regen:"回復", coin:"🪙", crit:"会心", heal:"癒し" };
 function buffMult(w){ return (1 + .1 * ((Math.min(5, SAVE.inv[w.id] || 1)) - 1)) * evoBuff(w.id); }
 function buffEntries(w, lv){
   const m = (1 + .1 * ((lv || Math.min(5, SAVE.inv[w.id] || 1)) - 1)) * evoBuff(w.id), out = [];
   for (const [k, v] of Object.entries(WBUFF[w.id] || {})) {
-    if (k === "shield") out.push(["shield", "開始時バリア", "🛡"]);
+    if (NPROP[k]) out.push(npText(k, v, m));
+    else if (k === "shield") out.push(["shield", "開始時バリア", "🛡"]);
     else if (k === "spStart") out.push([k, `必殺ゲージ初期値+${Math.round(v * m)}%`, `ゲージ+${Math.round(v * m)}`]);
     else if (k === "def") out.push([k, `受けるダメージ-${Math.round(v * m * 100)}%`, `防+${Math.round(v * m * 100)}%`]);
     else if (k === "regen") out.push([k, `ペア成立で最大HPの${(v * m * 100).toFixed(1)}%回復`, `回復+${(v * m * 100).toFixed(1)}%`]);
@@ -1406,6 +1444,10 @@ const GX_AC = [
   Object.assign(mkG("ac_g_eternity","acc","永遠の円環","🪐",6,{atk:.25,crit:.2,spAtk:.4,spGain:.4,coin:.3,hp:.15},"dark"),{gx:1})];
 ARMORS.push(...GX_AR); ACCS.push(...GX_AC); GEAR.push(...GX_AR, ...GX_AC);
 const GBY = Object.fromEntries(GEAR.map(g => [g.id, g]));
+Object.entries({
+  ar_knight:{flat:2}, ar_mage:{tHeal:.01}, ar_dragon:{guts:.1}, ar_sea:{bregen:.2}, ar_holy:{tHeal:.02}, ar_royal:{counter:.2}, ev_pumpkin:{counter:.15},
+  ar_g_blackangel:{counter:.25, resist:.3}, ar_g_celestia:{tHeal:.03, endure:true, resist:.5, guts:.2, capHit:.25, purify:true}
+}).forEach(([id, b]) => { if (GBY[id]) Object.assign(GBY[id].b, b); });
 /* ---- 1日のごほうび回数制限（コインのインフレ防止） ---- */
 const LIM_CAP = { cpu: 5, tower: 30, special: 6, coop: 6, net: 10 }, LIM_NAME = { cpu: "CPU対戦", tower: "無限の塔", special: "スペシャル戦", coop: "きょうりょく戦", net: "オンライン対戦" };
 const COMPS = {
@@ -1525,7 +1567,8 @@ function grantGear(id){
 function fmtBuffs(b, m){
   const out = [];
   for (const [k, v] of Object.entries(b || {})) {
-    if (k === "shield") out.push([k, "開始時バリア", "🛡"]);
+    if (NPROP[k]) out.push(npText(k, v, m));
+    else if (k === "shield") out.push([k, "開始時バリア", "🛡"]);
     else if (k === "spStart") out.push([k, `必殺ゲージ初期値+${Math.round(v * m)}%`, `ゲージ+${Math.round(v * m)}`]);
     else if (k === "def") out.push([k, `受けるダメージ-${Math.round(v * m * 100)}%`, `防+${Math.round(v * m * 100)}%`]);
     else if (k === "regen") out.push([k, `ペア成立で最大HPの${(v * m * 100).toFixed(1)}%回復`, `回復+${(v * m * 100).toFixed(1)}%`]);
@@ -1543,7 +1586,10 @@ function setBonus(k){
   for (const [tag, n] of Object.entries(cnt)) { if (n < 2) continue; const S = SETS[tag]; out.push({ tag, n, name: S.n, b: n >= 3 ? { ...S.b2, ...Object.fromEntries(Object.entries(S.b3).map(([key, v]) => [key, typeof v === "number" ? v + (S.b2[key] || 0) : v])) } : S.b2 }); }
   return out;
 }
-const CAP = { def: .5, crit: .6, regen: .12, hp: 1.2, atk: 1.5, spAtk: 1.5, spGain: 1.5, coin: 2, heal: 2, spStart: 100 };
+const CAP = { def: .5, crit: .6, regen: .12, hp: 1.2, atk: 1.5, spAtk: 1.5, spGain: 1.5, coin: 2, heal: 2, spStart: 50 };
+/* 必殺技1発のダメージは、相手の最大HPのこの割合まで（一撃で倒せないように） */
+const SP_CAP = .6;
+Object.keys(NPROP).forEach(k => { if (NPROP[k].cap != null) CAP[k] = NPROP[k].cap; });
 function bf(k){
   if (!(k === 0 || (k === 1 && modeSel.value === "2p"))) return {};
   const o = {}, add = (b, m) => { for (const [key, v] of Object.entries(b || {})) { if (typeof v === "number") o[key] = (o[key] || 0) + v * m; else o[key] = true; } };
@@ -1595,11 +1641,16 @@ function lookHTML(k){
 }
 function refreshLook(){ try { paintStage(); } catch (e) {} }
 /* ---- 仲間のスキル ---- */
-let turns = [0, 0], revived = [false, false], breath = [false, false], miracleUsed = [false, false];
+let turns = [0, 0], revived = [false, false], breath = [false, false], miracleUsed = [false, false], endureUsed = [false, false], DOT = [null, null], rw = [0, 0];
 function clearGhost(){ cards.forEach(x => x.classList.remove("ghost")); }
 function setGhost(x){ const b = x.querySelector(".back"); if (b) b.dataset.g = x.dataset.a; x.classList.add("ghost"); }
 function turnStart(k){
   turns[k]++;
+  { const Bt = bf(k), [tx, ty] = fpos(k);
+    if (Bt.tHeal && hp[k] > 0) { const h = Math.max(1, Math.round(hpMax[k] * Bt.tHeal)); hp[k] = Math.min(hpMax[k], hp[k] + h); popText("+" + h, tx, ty - 10, "#5dff8a", "clamp(1.2rem,5vw,2rem)"); }
+    if (Bt.bregen && !shield[k] && rng() < Bt.bregen) { shield[k] = true; popText("🛡 バリア再生", tx, ty + 30, "#7ab8ff", "clamp(1.1rem,5vw,1.8rem)"); }
+    if (DOT[k] && DOT[k].t > 0) { const d = DOT[k].per; DOT[k].t--; hp[k] = Math.max(0, hp[k] - d); popText("継続 -" + d, tx, ty + 60, "#c08cff", "clamp(1.1rem,5vw,1.8rem)"); try { hurt(k); } catch (e) {} if (hp[k] <= 0) { const sT = token; setTimeout(() => { if (sT === token) finish(true); }, 900); } }
+  }
   partyOf(k).forEach(co => {
   if (co.id === "lumi" && turns[k] % 3 === 0) {
     const _pool = cards.filter(x => !x.classList.contains("matched") && !x.classList.contains("open")), c = _pool.length ? rngPick(_pool) : undefined;
@@ -5367,7 +5418,7 @@ function start(announce){
   if (story) { if (stage >= 1) sp[0] = 25; if (stage >= 3) shield[0] = true; if (stage >= 6) sp[0] = 50; if (stage >= 11) sp[0] = 70; if (stage >= 13) sp[0] = 90; }
   for (const k of [0, 1]) { const B = bfS(k); if (B.spStart) sp[k] = Math.min(100, sp[k] + Math.round(B.spStart)); if (B.shield) shield[k] = true; }
   if (modeSel.value !== "2p") sp[1] = Math.min(100, sp[1] + dif().sp);
-  turns = [0, 0]; revived = [false, false]; breath = [false, false]; miracleUsed = [false, false];
+  turns = [0, 0]; revived = [false, false]; breath = [false, false]; miracleUsed = [false, false]; endureUsed = [false, false]; DOT = [null, null]; rw = [0, 0];
   $("win").classList.remove("show", "lose");
   board.style.gridTemplateColumns = `repeat(${n === 12 ? 6 : 4}, 1fr)`;
   const picks = NET.on && NET.deck ? NET.deck.picks.slice() : shuffle([...ANIMALS]).slice(0, n);
@@ -5399,11 +5450,22 @@ function curFlip(){ cur = 1 - cur; if (CO.on && cur === 0) { CO.who = 1 - CO.who
 const COB = () => CH.filter(c => c.boss);
 function coBoss(i){ const L = COB(), k = Math.max(0, Math.min(L.length - 1, i | 0)), c = L[k]; return { e: c.e, name: c.name, theme: c.theme, bg: c.bg, boss: true, pairs: c.pairs, mem: c.mem, hpMul: (c.hpMul || 1) * 1.7, reward: 140 + 30 * k }; }
 const coWhoName = () => CO.who === NET.me ? "あなた" : (NET.peerName || "ともだち");
+function clearGlow(){ document.querySelectorAll(".card.glow").forEach(x => x.classList.remove("glow")); }
+function flashHint(c){
+  const B = bf(cur); if (!B.flash || !myTurnOf(cur) || Math.random() >= B.flash) return;
+  const mate = cards.find(x => x !== c && x.dataset.a === c.dataset.a && !x.classList.contains("matched") && !x.dataset.g);
+  const others = cards.filter(x => x !== c && x !== mate && !x.classList.contains("matched") && !x.classList.contains("open") && !x.dataset.g);
+  if (!mate || !others.length) return;
+  const d = others[Math.floor(Math.random() * others.length)];
+  mate.classList.add("glow"); d.classList.add("glow");
+  const [fx, fy] = fpos(cur); popText("💡 ひらめき！", fx + 40, fy + 60, "#fff3a0", "clamp(1.2rem,5vw,2rem)");
+}
 function pick(c){
   if (lock || (c.classList.contains("open") && !c.dataset.hint) || c.classList.contains("matched")) return;
   delete c.dataset.hint; if (CO.on && NET.on && NET.host && cur === 1) netSend({ t: "pick", i: +c.dataset.i }); if (c.dataset.g) { doGimmick(c); return; } c.classList.add("open"); sfx.flip(); skFlipFx(c, !first);
   if (Math.random() < memRate) mem[c.dataset.i] = c.dataset.a;
-  if (!first) { first = c; updateUI(); if (isCpuTurn()) cpuSecond(); return; }
+  if (!first) { first = c; updateUI(); if (isCpuTurn()) cpuSecond(); else flashHint(c); return; }
+  clearGlow();
   const a = first; first = null; lock = true; updateUI(); if (NET.on) NET.seq++;
   if (!isCpuTurn()) clearGhost();
   const my = token;
@@ -5418,10 +5480,14 @@ function pick(c){
     setTimeout(() => {
       if (my !== token) return;
       [a, c].forEach(x => x.classList.remove("open", "wrong"));
-      { if (partyOf(cur).some(x => x.id === "garett") && modeSel.value !== "2p") [a, c].forEach(setGhost); }
-      streak = 0; curFlip();
-      if (skip[cur]) { skip[cur] = false; curFlip(); popText("行動不能！", innerWidth / 2, innerHeight / 2, "#b388ff"); }
-      lock = false; updateUI(); turnStart(cur);
+      { if (partyOf(cur).some(x => x.id === "garett") && modeSel.value !== "2p") [a, c].forEach(setGhost);
+        const Bm = bf(cur); if (Bm.mem && !isCpuTurn() && myTurnOf(cur) && Math.random() < Bm.mem) [a, c].forEach(setGhost); }
+      const Br = bf(cur); let rewound = false;
+      if (Br.rewind && rw[cur] < Math.floor(Br.rewind)) { rw[cur]++; rewound = true; const [rx, ry] = fpos(cur); popText("⏳ 時がもどる！", rx + 40, ry + 60, "#ffe9a8", "clamp(1.2rem,5vw,2rem)"); }
+      streak = 0;
+      if (!rewound) { curFlip();
+        if (skip[cur]) { skip[cur] = false; curFlip(); popText("行動不能！", innerWidth / 2, innerHeight / 2, "#b388ff"); } }
+      lock = false; updateUI(); if (!rewound) turnStart(cur);
       if (isCpuTurn()) cpuFirst();
     }, 1100);
   }
@@ -5451,6 +5517,7 @@ function gimmickPlan(en){
 }
 function gimText(){ if (!gimList.length) return ""; const c = {}; gimList.forEach(g => { c[g] = (c[g] || 0) + 1; }); return "🎲 とくべつ札： " + Object.entries(c).map(([g, n]) => `${g}×${n}`).join(" "); }
 function gimTurnEnd(){
+  clearGlow();
   if (first) { first.classList.remove("open"); first = null; }
   streak = 0; curFlip();
   if (skip[cur]) { skip[cur] = false; curFlip(); popText("行動不能！", innerWidth / 2, innerHeight / 2, "#b388ff"); }
@@ -5506,6 +5573,22 @@ function partyBounce(k, mem){
   const fc = $("fc"); if (!fc || k !== 0) return; const ids = partyOf(0).map(x => x.id);
   mem.forEach(c => { const el = fc.children[ids.indexOf(c.id)]; if (el) el.animate([{ transform: "translateY(0) scale(1)" }, { transform: "translateY(-14px) scale(1.4)", offset: .4 }, { transform: "translateY(0) scale(1)" }], { duration: 600 }); });
 }
+function NPX(cur, victim, B, dmg){
+  const pop = (k, t, col) => { const [x, y] = fpos(k); popText(t, x, y + 70, col, "clamp(1.2rem,5vw,2rem)"); };
+  const ex = (n, t, col, ic) => { const d2 = takeDmg(victim, Math.max(1, Math.round(n)), { pierce: !!B.pierce }); const [ax, ay] = fpos(victim); popText(t + " -" + d2, ax, ay + 90, col, "clamp(1.2rem,5vw,2rem)"); try { burst(ax, ay, 25, ic, 1); } catch (e) {} };
+  if (B.vamp) { const h = Math.max(1, Math.round(dmg * B.vamp)); hp[cur] = Math.min(hpMax[cur], hp[cur] + h); pop(cur, "吸血 +" + h, "#ff7aa8"); }
+  if (B.chase && rng() < B.chase) ex(dmg * .5, "追撃！", "#ff9a6b", "💥");
+  if (B.dbl && rng() < B.dbl) ex(dmg * .5, "2回攻撃！", "#7ad8ff", "⚔️");
+  if (B.dot) { DOT[victim] = { t: 3, per: Math.max(1, Math.round(hpMax[victim] * B.dot)) }; }
+  if (B.prism && streak === 3) { sp[cur] = Math.min(100, sp[cur] + Math.round(B.prism)); pop(cur, "🌈 ゲージ+" + Math.round(B.prism), "#ffd0ff"); }
+  if (B.rainbow && rng() < B.rainbow) {
+    const r = Math.floor(rng() * 4);
+    if (r === 0) { const h = Math.round(hpMax[cur] * .06); hp[cur] = Math.min(hpMax[cur], hp[cur] + h); pop(cur, "🌈 回復 +" + h, "#5dff8a"); }
+    else if (r === 1) { sp[cur] = Math.min(100, sp[cur] + 15); pop(cur, "🌈 ゲージ+15", "#ffd0ff"); }
+    else if (r === 2) { shield[cur] = true; pop(cur, "🌈 バリア！", "#7ab8ff"); }
+    else ex(dmg * .6, "🌈 七色", "#ff9ae6", "🌈");
+  }
+}
 function pairResolved(a, c, my){
   if (my !== token) return;
       [a, c].forEach(x => { x.classList.remove("open"); x.classList.add("matched", "m" + cur); delete mem[x.dataset.i]; });
@@ -5515,9 +5598,12 @@ function pairResolved(a, c, my){
       if (a.dataset.gold && !isCpuTurn() && myTurnOf(cur)) goldBonus();
       const victim = 1 - cur, type = TYPE[a.dataset.a], B = bf(cur);
       let base = (10 + streak * 6 + Math.floor(rng() * 6)) * (1 + (B.atk || 0)), crit = false;
-      if (B.crit && rng() < B.crit) { base *= 2; crit = true; }
+      if (B.first && matchedCount === 1) base *= 1 + B.first;
+      if (B.chain && streak > 1) base *= 1 + B.chain * (streak - 1);
+      if (B.crit && rng() < B.crit) { base *= 2 + (B.critDmg || 0); crit = true; }
       const pm = partyBonus(cur, victim, CARD_EL[a.dataset.a]); base *= pm.mult;
-      const dmg = takeDmg(victim, Math.round(base));
+      const dmg = takeDmg(victim, Math.round(base), { pierce: !!B.pierce, cn: true });
+      NPX(cur, victim, B, dmg);
       if (pm.el) { const [vx0, vy0] = fpos(victim); if (pm.mem.length) { popText(`${pm.mem.map(x => x.e).join("")}${ELS[pm.el].e} パーティこうげき！`, innerWidth / 2, innerHeight * .27, ELS[pm.el].c, "clamp(1.1rem,5vw,1.8rem)"); if (cur === 0 || modeSel.value === "2p") partyBounce(cur, pm.mem); } if (pm.adv > 0) popText("弱点！", vx0, vy0 + 60, "#ffea00", "clamp(1.3rem,6vw,2.1rem)"); else if (pm.adv < 0) popText("いまひとつ…", vx0, vy0 + 60, "#9ab", "clamp(1.1rem,5vw,1.8rem)"); }
       sp[cur] = Math.min(100, sp[cur] + Math.round((22 + streak * 6) * (1 + (B.spGain || 0)))); sp[victim] = Math.min(100, sp[victim] + 10);
       if (crit) { const [cx, cy] = fpos(victim); popText("会心の一撃！", cx, cy + 40, "#ffea00", "clamp(1.6rem,8vw,2.8rem)"); }
@@ -5528,19 +5614,22 @@ function pairResolved(a, c, my){
       sfx.hit(streak); matchFX(a, c, streak, dmg, victim, type); skMatchFx(a, c, streak);
       speakHit(cur, victim, streak, type);
       lock = false; updateUI();
-      if (hp[victim] <= 0) return setTimeout(() => { if (my === token) finish(true); }, 1100);
+      if (hp[victim] <= 0 || hp[cur] <= 0) return setTimeout(() => { if (my === token) finish(true); }, 1100);
       if (matchedCount === total) return setTimeout(() => { if (my === token) finish(false); }, 1100);
       if (isCpuTurn()) cpuFirst();
 }
 
 /* ---- 必殺技（種類いろいろ） ---- */
-function takeDmg(v, d){
-  if (shield[v]) { shield[v] = false; d = Math.ceil(d / 2); const [x, y] = fpos(v); popText("バリア！", x, y + 30, "#7ab8ff", "clamp(1.4rem,6vw,2.2rem)"); }
+function takeDmg(v, d, o = {}){
+  if (shield[v] && !o.pierce) { shield[v] = false; d = Math.ceil(d / 2); const [x, y] = fpos(v); popText("バリア！", x, y + 30, "#7ab8ff", "clamp(1.4rem,6vw,2.2rem)"); }
   d = Math.max(1, Math.round(d * (1 - (bf(v).def || 0))));
+  { const Bv = bf(v); if (Bv.flat) d = Math.max(1, d - Math.round(Bv.flat)); if (Bv.guts && hp[v] <= hpMax[v] / 2) d = Math.max(1, Math.round(d * (1 - Bv.guts))); if (Bv.capHit) d = Math.max(1, Math.min(d, Math.round(hpMax[v] * Bv.capHit))); }
   hp[v] -= d;
+  if (o.cn && hp[v] > 0) { const Bc = bf(v); if (Bc.counter && rng() < Bc.counter) { const a = 1 - v, cd = Math.max(1, Math.round(d * .4)); hp[a] = Math.max(0, hp[a] - cd); const [cx, cy] = fpos(a); popText("反撃！ -" + cd, cx, cy + 50, "#ffb36b", "clamp(1.2rem,5vw,2rem)"); try { hurt(a); } catch (e) {} } }
   if (hp[v] <= 0 && !revived[v]) { const c = partyOf(v).find(x => x.id === "zeno"); if (c) { revived[v] = true; hp[v] = Math.max(1, Math.ceil(hpMax[v] * .3)); const [x, y] = fpos(v); popText("🛡️ ふみとどまった！", x, y, "#ffd966", "clamp(1.4rem,6vw,2.4rem)"); if (sfxOn) [523, 784, 1047].forEach((f, i) => tone(f, .2, "square", .12, i * .07)); } }
   if (hp[v] <= 0 && !miracleUsed[v] && hasMiracle(v)) { miracleUsed[v] = true; hp[v] = Math.max(1, Math.ceil(hpMax[v] * .5)); sp[v] = 100; const [x, y] = fpos(v); popText("💫 奇跡がおきた！", x, y, "#ffffff", "clamp(1.6rem,7vw,2.8rem)"); try { flash(6); burst(x, y, 80, "💫", 1.4); } catch (e) {} if (sfxOn) [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, .25, "triangle", .14, i * .08)); try { updateUI(); } catch (e) {} }
   if (hp[v] <= 0 && v === 0 && isTower() && !TW.phx && (TW.rel || []).includes("phx")) { TW.phx = true; hp[v] = Math.max(1, Math.ceil(hpMax[v] * .4)); if (SAVE.towerRun) SAVE.towerRun.phx = 1; const [x, y] = fpos(v); popText("🪶 ふしちょうの羽！", x, y, "#ffb86b", "clamp(1.4rem,6vw,2.4rem)"); burst(x, y, 60, "🪶", 1.3); if (sfxOn) [523, 784, 1047].forEach((f, i) => tone(f, .2, "square", .12, i * .07)); }
+  if (hp[v] <= 0 && !endureUsed[v] && bf(v).endure) { endureUsed[v] = true; hp[v] = 1; const [x, y] = fpos(v); popText("🔥 踏ん張った！", x, y, "#ffb347", "clamp(1.4rem,6vw,2.4rem)"); try { burst(x, y, 50, "🔥", 1.2); } catch (e) {} }
   return d;
 }
 function showSpMenu(){
@@ -5557,12 +5646,18 @@ function showSpMenu(){
 }
 $("spBtn").addEventListener("click", () => { ensureAudio(); if (canSpecial()) showSpMenu(); });
 
+function cosmosShow(){
+  const pool = cards.filter(x => !x.classList.contains("matched") && !x.classList.contains("open") && !x.dataset.g);
+  pool.forEach(x => { x.classList.add("open"); x.dataset.hint = "1"; });
+  if (pool.length) { const [x, y] = fpos(cur); popText("🌌 宇宙の理", x + 40, y + 60, "#c8b6ff", "clamp(1.2rem,5vw,2rem)"); }
+  setTimeout(() => { pool.forEach(x => { if (x.dataset.hint) { delete x.dataset.hint; if (x !== first) x.classList.remove("open"); } }); }, 1800);
+}
 function doSpecial(p, idx, cb){
   emote(p, "special", 2400);
   if (lock) return;
   const S = specOf(p)[idx]; if (!S) return;
   if (NET.on) NET.seq++;
-  lock = true; sp[p] = 0; $("spMenu").classList.remove("show"); updateUI();
+  lock = true; sp[p] = Math.round(bf(p).spKeep || 0); { if (bf(p).cosmos) setTimeout(cosmosShow, 1300); } $("spMenu").classList.remove("show"); updateUI();
   if (!(modeSel.value !== "2p" && p === 1) && myTurnOf(p)) ev("special");
   const my = token, v = 1 - p, key = keyOf(p);
   $("cport").innerHTML = faceFor(p);
@@ -5581,7 +5676,7 @@ function applySpecial(S, p, v, cb){
   const my = token, [px, py] = fpos(p), [vx, vy] = fpos(v);
   let dmg = 0;
   if (S.kind === "dmg" || S.kind === "drain") {
-    dmg = takeDmg(v, Math.round((Math.round(maxHp * S.pct) + Math.floor(rng() * 6)) * (1 + (bf(p).spAtk || 0))));
+    { const raw = Math.round((Math.round(maxHp * S.pct) + Math.floor(rng() * 6)) * (1 + (bf(p).spAtk || 0))); dmg = takeDmg(v, Math.max(1, Math.min(raw, Math.round(hpMax[v] * SP_CAP)))); }
     const big = S.kind === "dmg" ? 8 : 5;
     shake(big); flash(big); sfx.hit(5);
     burst(vx, vy, 160, "💥", 2); ring(vx, vy, S.color); ring(vx, vy, "#fff", 120);
@@ -5599,7 +5694,8 @@ function applySpecial(S, p, v, cb){
     popText("バリア展開！", px, py - 20, "#7ab8ff", "clamp(2rem,10vw,3.6rem)");
   }
   if (S.kind === "seal") {
-    skip[v] = true; burst(vx, vy, 70, "⛓️", 1.2); ring(vx, vy, S.color); sfx.atk("dark"); shake(4);
+    { const Bs = bf(v); if (Bs.purify || (Bs.resist && rng() < Bs.resist)) { popText("耐性！ 封印をはねのけた", vx, vy + 40, "#9dffb0", "clamp(1.2rem,5vw,2rem)"); } else skip[v] = true; }
+    burst(vx, vy, 70, "⛓️", 1.2); ring(vx, vy, S.color); sfx.atk("dark"); shake(4);
     popText("封印！", vx, vy - 20, "#b388ff", "clamp(2.4rem,12vw,4.5rem)");
   }
   if (S.kind === "peek") peekAll(p);
