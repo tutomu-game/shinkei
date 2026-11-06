@@ -2496,7 +2496,7 @@ function netRecv(m){
   if (!m || typeof m !== "object") return; NET.lastRx = Date.now();
   if (m.t === "hello") { NET.peerProf = cleanProf(m.prof); NET.peerName = socNm(m.nm); onlRender(); }
   else if (m.t === "start" && !NET.host) {
-    const co = Number.isInteger(m.co) && m.co >= 0 && m.co < COB().length ? m.co : -1;
+    const co = Number.isInteger(m.co) && m.co >= 0 && (m.co < COB().length || (m.co >= 100 && m.co < 107)) ? m.co : -1;
     if (co >= 0 && m.n !== coBoss(co).pairs) return;
     const n = [6, 8, 12].includes(m.n) ? m.n : 6, pk = Array.isArray(m.picks) ? m.picks.filter(a => ANIMALS.includes(a)) : [];
     if (pk.length !== n || new Set(pk).size !== n) return;
