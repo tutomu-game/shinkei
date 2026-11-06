@@ -240,6 +240,7 @@
   #ms, #lb { display:none; position:fixed; inset:0; background:rgba(8,3,14,.95); overflow:auto; padding:12px; }
   #ms { z-index:105; } #lb { z-index:125; align-items:center; justify-content:center; }
   #ms.show { display:block; } #lb.show { display:flex; }
+  img.art { width:100%; height:100%; object-fit:contain; display:block; image-rendering:auto; } img.art.hurt { filter:brightness(1.6) saturate(.6); } img.art.ko { filter:grayscale(1) brightness(.7); }
   #pet { display:none; position:fixed; inset:0; z-index:105; background:radial-gradient(#2a1a3a,#0d0812); overflow:auto; padding:12px; } #pet.show { display:block; }
   .pname { text-align:center; margin:6px 0; font-size:1.2rem; color:#ffe9a8; } .pname .chip { margin-left:6px; font-size:.75rem; }
   .pview { position:relative; width:min(78vw,300px); margin:6px auto; border-radius:20px; background:linear-gradient(#3b2a55,#241838); border:3px solid #c9a227; padding:8px; }
@@ -4985,10 +4986,15 @@ function nyaFace(emo, dark, sk){
 
 /* ---------- 組み込み ---------- */
 PX_ALL.forEach(id => { const v = PORT[id]; PORT[id] = () => pxOn() ? pxEnemy(id) : v(); });
+/* ---- 画像アート（AI作成の絵）：あるキャラは画像を優先、無ければ従来のSVG/ドット絵 ---- */
+const ART = { "🦇": "vamp", "🐺": "ginga", "🛡️": "zeno", "🧙": "nerga", "👹": "garuze", "🐉": "valdora", "🎭": "mordre", "🌑": "abyss", "🐙": "leviathan", "🗿": "gaia", "🧝": "serena", "🪞": "shadow", "🔮": "nemea", "🧓": "gareth", "🧚": "lumi", "🐾": "popo", "🌸": "flora", "👵": "aya", "🌌": "yoru2", "🕳️": "yoru", "🐀": "knez", "🌠": "mite", "⏳": "chrono", "☀️": "sol", "🏔️": "terra", "🪙": "gold", "🌲": "silva", "💧": "walta", "🔥": "blaze", "🌙": "luna", "☠️": "nihil" };
+const artImg = (k, st) => `<img class="art${st === "hurt" ? " hurt" : st === "ko" ? " ko" : ""}" src="img/${ART[k]}.webp" alt="" draggable="false">`;
+Object.keys(ART).forEach(k => { PORT[k] = () => artImg(k); });
 const EMO = [null, null];
 function setFace(k, e){
   if (!pxOn()) return; EMO[k] = e;
   const pf = $("pf" + k), en = enemy(); let html;
+  if (k === 1 && en && ART[en.e]) { const fb = $("f1").querySelector(".fbody"); if (fb) fb.innerHTML = artImg(en.e, e); if (pf) pf.innerHTML = artImg(en.e, e); return; }
   if (k === 1 && en && PX_ALL.includes(en.e)) { html = pxEnemy(en.e, e === "hurt" || e === "ko"); const fb = $("f1").querySelector(".fbody"); if (fb) fb.innerHTML = html; }
   else if (k === 1 && en) html = PORT[en.e]();
   else if (k === 1 && modeSel.value === "cpu") { html = pxEnemy("👹", e === "hurt" || e === "ko"); const fb = $("f1").querySelector(".fbody"); if (fb) fb.innerHTML = html; }
@@ -5007,6 +5013,7 @@ function emoOf(t){
   return "normal";
 }
 function pxPortrait(L){
+  if (ART[L.who]) return artImg(L.who, /^(ぐ|うぐ|ぬ)|見事|やられ|負け|まいった|ぐえ/.test(L.text) ? "hurt" : "");
   if (pxOn()) {
     if (L.who === "⚔️") return pxFaceHero(L.emo || emoOf(L.text), false, skinOf(0));
     if (PX_ALL.includes(L.who)) return pxEnemy(L.who, /^(ぐ|うぐ|ぬ)|見事|やられ|負け|まいった|ぐえ/.test(L.text));
