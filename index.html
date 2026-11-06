@@ -1368,7 +1368,7 @@ const NPROP = {
   flat: { n: "軽減", d: v => `受けるダメージ-${Math.round(v)}`, cap: 10 },
   endure: { n: "踏ん張り", d: () => "HPが0になっても1回だけ耐える" },
   cosmos: { x: 1, n: "宇宙の理", d: () => "必殺技のあと、全カードが一瞬見える" },
-  rewind: { x: 1, n: "時のまきもどし", d: v => `ミスしても、1戦闘に${Math.max(1, Math.floor(v))}回までターンが続く`, cap: 4 },
+  rewind: { x: 1, n: "時のまきもどし", d: v => `ミスしたとき40%で手番が続く（1戦闘に${Math.max(1, Math.floor(v))}回まで）`, cap: 4 },
   rainbow: { x: 1, n: "七色の祝福", d: v => `ペア成立時${Math.round(v * 100)}%で、回復・ゲージ・バリア・追加ダメージのどれかが発動`, cap: .6 },
   prism: { x: 1, n: "プリズム", d: v => `3連続成功で必殺ゲージ+${Math.round(v)}`, cap: 50 },
   capHit: { x: 1, n: "聖なる守り", d: v => `1回の被ダメージは最大HPの${Math.round(v * 100)}%まで`, cap: .5 },
@@ -5483,7 +5483,7 @@ function pick(c){
       { if (partyOf(cur).some(x => x.id === "garett") && modeSel.value !== "2p") [a, c].forEach(setGhost);
         const Bm = bf(cur); if (Bm.mem && !isCpuTurn() && myTurnOf(cur) && Math.random() < Bm.mem) [a, c].forEach(setGhost); }
       const Br = bf(cur); let rewound = false;
-      if (Br.rewind && rw[cur] < Math.floor(Br.rewind)) { rw[cur]++; rewound = true; const [rx, ry] = fpos(cur); popText("⏳ 時がもどる！", rx + 40, ry + 60, "#ffe9a8", "clamp(1.2rem,5vw,2rem)"); }
+      if (Br.rewind && rw[cur] < Math.floor(Br.rewind) && rng() < .4) { rw[cur]++; rewound = true; const [rx, ry] = fpos(cur); popText("⏳ 時がもどる！", rx + 40, ry + 60, "#ffe9a8", "clamp(1.2rem,5vw,2rem)"); }
       streak = 0;
       if (!rewound) { curFlip();
         if (skip[cur]) { skip[cur] = false; curFlip(); popText("行動不能！", innerWidth / 2, innerHeight / 2, "#b388ff"); } }
