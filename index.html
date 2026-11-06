@@ -2763,8 +2763,8 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) { so
 const PET_XP = [8, 60, 200];
 const PET_NAME = { 0: ["たまご"], 1: ["こねこ"], 2: ["", "ぶんぶんニャ", "ふわにゃん", "いたずらニャ"], 3: ["", "ニャイト（騎士）", "ニャンシェル（姫）", "ニャックス（怪盗）"] };
 const PET_TYPE = ["", "⚔️ たたかうタイプ", "💖 なかよしタイプ", "😼 やんちゃタイプ"];
-const petUnlocked = () => !!(SAVE.petU || (SAVE.pet && SAVE.pet.xp > 0));
-function petUnlock(){ SAVE.petU = true; if (!SAVE.pet || !SAVE.pet.xp) SAVE.pet = { s: 0, ty: 0, xp: 0, cb: 0, cc: 0, cn: 0, f: 80, h: 70, p: 0, pa: 0, hung: false, t: Date.now(), pl: 0 }; save(); }
+const petUnlocked = () => !!SAVE.petU;
+function petUnlock(){ SAVE.petU = true; SAVE.pet = { s: 0, ty: 0, xp: 0, cb: 0, cc: 0, cn: 0, f: 80, h: 70, p: 0, pa: 0, hung: false, t: Date.now(), pl: 0 }; save(); }
 function petGet(){
   if (!SAVE.pet) SAVE.pet = { s: 0, ty: 0, xp: 0, cb: 0, cc: 0, cn: 0, f: 80, h: 70, p: 0, pa: 0, hung: false, t: Date.now(), pl: 0 };
   return SAVE.pet;
@@ -2929,7 +2929,7 @@ function decodeV4(bits, ver){
     let gad = null, gtd = null; 
     let trd = null; if (ver >= 14) { trd = {}; WEAPONS.filter(w => w.r >= 5).forEach(w => { const n = R(3); if (n) trd[w.id] = Math.min(n, TR_MAX(w)); }); }
     if (ver >= 15) { gad = {}; gtd = {}; ARMORS.forEach(g => { const n = R(2); if (n) gad[g.id] = Math.min(2, n); }); ARMORS.filter(g => g.r >= 5).forEach(g => { const n = R(3); if (n) gtd[g.id] = Math.min(3, n); }); }
-    let pet = null; if (ver >= 16) { pet = { s: R(2), ty: R(2), xp: R(10), cb: R(8), cc: R(8), cn: R(4) }; pet.u = ver >= 17 ? R(1) : (pet.xp > 0 ? 1 : 0); }
+    let pet = null; if (ver >= 16) { pet = { s: R(2), ty: R(2), xp: R(10), cb: R(8), cc: R(8), cn: R(4) }; pet.u = ver >= 17 ? R(1) : 0; }
     const end = pos, crc = R(16), body = bits.slice(0, end), bytes = [];
     for (let i = 0; i < body.length; i += 8) bytes.push(parseInt(body.slice(i, i + 8).padEnd(8, "0"), 2));
     if (crc16(bytes) !== crc) return null;
